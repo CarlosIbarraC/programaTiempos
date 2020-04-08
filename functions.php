@@ -274,10 +274,7 @@ function fechas(){
 		$n=$n+1;
 		$sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro) values ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro') ";
 		$ejecutar2 = mysqli_query($conexion,$sentencia2);
-		echo $idEmpleado;
-		echo $fechaT;
-		echo $entrada;
-		echo $cadena;
+		
 		 }
 	}
 	}
