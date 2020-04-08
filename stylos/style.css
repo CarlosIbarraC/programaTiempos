@@ -1,0 +1,24 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background: rgb(71, 82, 97);
+}
+.colorEntrada{
+    background-color: rgba(241, 161, 42, 0.904);
+}
+.colorSalida{
+    background-color: rgb(46, 49, 54);
+}
+form.FormularioE{
+    margin: auto;
+    background: rgb(179, 127, 31);
+    border-radius: 5px;
+}
+div.formDatosE{
+    margin: auto;
+}
+.aparecer{
+    display: none;
+}
