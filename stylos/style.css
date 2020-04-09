@@ -3,7 +3,7 @@
     margin: 0px;
 }
 body{
-    background: rgb(71, 82, 97);
+    background: rgb(17, 28, 44);
 }
 .colorEntrada{
     background-color: rgba(241, 161, 42, 0.904);
@@ -21,4 +21,30 @@ div.formDatosE{
 }
 .aparecer{
     display: none;
+}
+.modal-body{
+    background-color: rgb(6, 30, 53);
+    color: rgba(241, 161, 42, 0.904);
+}
+.modal-header , .modal-footer{
+    background-color: rgb(214, 162, 18);
+    color: rgb(121, 8, 8);
+    border-bottom:none;
+    border-top:none;
+}
+.btn-secondary {
+    background-color: rgb(136, 8, 3)!important;
+    border: none;
+    color:rgb(214, 162, 18) ;
+}
+.btn-primary{
+    background-color: rgb(7, 42, 75)!important;
+    border: none;
+    color: rgba(83, 82, 81, 0.904);
+
+}
+.tabledark{
+    background-color: rgb(71, 78, 87);
+    color: rgb(156, 161, 161);
+    
 }

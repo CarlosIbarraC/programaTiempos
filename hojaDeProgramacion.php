@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
 <meta charset="UTF-8">
     <title>manejo de tiempos</title>
     <meta name="viewport" content="width=device-width, user-scalable=no,
 	 initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href='css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-    <link href='stylos\style.css' rel='stylesheet' type='text/css'>
+    <link href='stylos/style.css' rel='stylesheet' type='text/css'>
     <link href='js/alertify.min.css' rel='stylesheet' type='text/css'>
     <link href='js/themes/default.min.css' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
@@ -21,75 +17,66 @@
 <?php
 /* 
 ------------------------------------inserta datos nuevos-------------------------- */
-session_start();
+
 require_once("conexion.php");
 require_once("functions.php");
 
-$id=$_SESSION['Empleado'];
-?>
 
+?>
 <body>
     <div class="container mr-0">
         <div class="row mx-0">
         <button class="btn-sm btn-dark col-6 my-4 px-3 mx-auto"><a href="cargarEmpleados.php" class="text-warning text-left">Listado Empleados</a></button>
-        <button class="btn-sm btn-warning text-dark col-6 my-4 px-3 mx-auto"><a href="hojaDeProgramacion.php" class="text-dark text-left">Programacion</a></button>
+        
         </div>
-    </div>   
+    </div>
+   
+    
+    
     
     <!-- modal para ingreso de entradas -->
     <div class="container">
-        <div id="tablaEntradas">
-        </div>
+        <div id="tablaDeProgramacion">
+    </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modificarHora" tabindex="-1" role="dialog" aria-labelledby="examplemodificarHora"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agregar Entrada/Salida Faltante</h5>
+                    <h5 class="modal-title" id="examplemodificarHora">Cambiar Hora de Programacion</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body bg-dark">
+                <div class="modal-body ">
                     <div class="container">
                         <form method="post" action="" class="form-group" id="FormularioEmpleados">
+                           <input type="hidden" name="idP" id="idP" class="form-control"
+                                value="" readonly><br>
 
-                            <input type="text" name="name" id="Empleado" class="form-control"
-                                value="<?php  DatosNombre($id,'titulo')?>" readonly><br>
-                            <input type="hidden" name="numero" id="numero"
-                                value="<?php  DatosNombre($id,'id')?>">
-                            <input type="hidden" name="nombre" id="nombre"
-                                value="<?php  DatosNombre($id,'nombre')?>">
-                            <label class="text-warning">dd/mm/AAAA hh:mm a.m./p.m.</label>
-                            <input type="datetime" class="form-control" name="fecha" id="fecha"><br>
-
-
-                            <div class="form-check " class="form-control">
-                                <input class="form-check-input" type="radio" name="estado" id="estado1" value="Entrada"
-                                    checked>
-                                <label class="form-check-label text-warning" for="estadoEmpleado1">
-                                    Entrada
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="estado" id="estado2" value="Salida">
-                                <label class="form-check-label text-warning" for="estadoEmpleado2">
-                                    Salida
-                                </label>
-                            </div>
-                            <input type="submit" id="guardarnuevo" name="submit" value="Guardar"
+                            <input type="text" name="nombreP" id="nombreP" class="form-control"
+                                value="" readonly><br>
+                            <input type="text" name="areaP" id="areaP"
+                                value="" class="form-control" readonly><br>
+                            <input type="text" name="fechaP" id="fechaP"
+                                value="" class="form-control" readonly><br>
+                            <input type="text" name="estadoP" id="estadoP"
+                                value="" class="form-control" readonly><br>
+                            <label class="text-warning">Ajuste de hora:</label>
+                            <input type="text" class="form-control" name="horaP" id="horaP"><br>                            
+                            
+                            <input type="submit" id="guardarPrograma" name="submit" value="Guardar"
                                 class="btn btn-warning"><br>
                         </form>
                     </div>
-
-
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
                     </div>
-                </div>
+                
             </div>
         </div>
 
@@ -98,13 +85,15 @@ $id=$_SESSION['Empleado'];
 </html>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#tablaEntradas').load('tablaEntradas.php');
-    $('#tdEstado').addClass('colorEntrada');
+    $('#tablaDeProgramacion').load('tablaDeProgramacion.php');
+    
 });
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#guardarnuevo').click(function() {
+    $('#guardarprograma').click(function() {
+        $('#idP').val(); 
+        $('#horaP').val();
         numero = $('#numero').val();
         nombre = $('#nombre').val();
         fecha = $('#fecha').val();
@@ -119,6 +108,3 @@ $(document).ready(function() {
     });
 
 });
-
-</script>
-

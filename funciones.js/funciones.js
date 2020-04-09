@@ -118,3 +118,26 @@ function eliminarDatosTiempos(id){
  });
  
  }
+ function guardarEdicionProgramacion(){
+  idE=$('#idE').val();
+  horaP=$('#horaP').val();  
+
+  cadena= "idE=" + idE + 
+          "&horaP=" + horap ;
+  console.log(cadena);       
+  $.ajax({
+    type:"post",
+    url:"edicionProgramacion.php",
+    data:cadena,
+    success:function(r){
+      if(r==1){
+       
+        $('#tablaDeProgramacion').load('tablaDeProgramacion.php');
+        alertify.success("actualizado con exito:");
+      }else{
+        alertify.success("no se actualizo");
+        console.log(r)
+      }
+    }
+  });
+}

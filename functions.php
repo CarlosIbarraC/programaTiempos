@@ -241,10 +241,11 @@ function fechas(){
 
 	/* ------------------seleccionamos Empleado---------------------- */
 	global $conexion;	
-	$sentencia = "SELECT id_empleado FROM nombresempleados order by nombre   ";
+	$sentencia = "SELECT id_empleado,area FROM nombresempleados order by nombre   ";
 	$ejecutar = mysqli_query($conexion,$sentencia);
 	while($fila = $ejecutar->fetch_array()) {
 		$idEmpleado=$fila[0];
+		$area=$fila[1];
 	?>
 	
 
@@ -272,12 +273,44 @@ function fechas(){
 			  $seguro=$idEmpleado.$fechaT.$cadena;
 		 }
 		$n=$n+1;
-		$sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro) values ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro') ";
+		$sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,area) values ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro','$area')  ";
 		$ejecutar2 = mysqli_query($conexion,$sentencia2);
 		
 		 }
 	}
 	}
 } /* --------------fin funcion de insertar programacion ------------------------ */	
+
+/* -----------------------------------funcin para los dias en español----------------------- */
+function conversionDias($fecha){
+	$fechaLarga= date(" j-m-Y",strtotime($fecha));
+	$fechaDia= date("l",strtotime($fecha));
+	
+	switch($fechaDia){
+		case "Monday":
+			echo "lunes".$fechaLarga;
+		break;
+		case "Tuesday":
+			echo "Martes".$fechaLarga;
+		break;
+		case "Wednesday":
+			echo "Miercoles".$fechaLarga;
+		break;
+		case "Thursday":
+			echo "Jueves".$fechaLarga;
+		break;
+		case "Friday":
+			echo "Viernes".$fechaLarga;
+		break;
+		case "Saturday":
+			echo "Sabado".$fechaLarga;
+		break;
+		case "Sunday":
+			echo "Domingo".$fechaLarga;
+		break;
+	}
+	
+}
+
  ?>
  

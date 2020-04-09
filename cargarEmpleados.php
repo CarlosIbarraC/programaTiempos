@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Cargar empleados</title>
+<meta charset="UTF-8">
+    <title>manejo de tiempos</title>
     <meta name="viewport" content="width=device-width, user-scalable=no,
 	 initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href='css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-    <link href='css/style.css' rel='stylesheet' type='text/css'>
+    <link href='stylos\style.css' rel='stylesheet' type='text/css'>
     <link href='js/alertify.min.css' rel='stylesheet' type='text/css'>
     <link href='js/themes/default.min.css' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
     <script src="js/jquery.min.js"></script>
     <script src="js/alertify.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/funciones.js"></script>
-
+    <script src="funciones.js/funciones.js"></script>
+    <link href='css/select2.css' rel='stylesheet' type='text/css'>
+    <script src="js/select2.js"></script>
+</head>
 </head>
 <?php
 require_once("conexion.php");
@@ -105,19 +105,19 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>"class="FormularioE form-group" method="post">
             <h3 class="py-2 text-center">Ingreso de Empleados Nuevos</h3>
                 <div class="col-8 pt-4 pb-2 formDatosE">
-                    <label for="identificacion">Identificacion 🔅</label>
+                    <label for="identificacion">Identificacion *</label>
                 </div>
                 <div class="col-8 py-2 formDatosE">
                     <input type="number" name="identificacion" class="form-control" placeholder="Nº  identificacion" require>
                 </div>
                 <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Nombre 🔅</label>
+                    <label for="identificacion">Nombre *</label>
                 </div>
                 <div class="col-8 py-2 formDatosE">
                     <input type="text" name="nombre" class=" form-control"placeholder="Nombre del Empleado" require>
                 </div>
                 <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Area 🔅</label>
+                    <label for="identificacion">Area *</label>
                 </div>
                 <div class="col-8 py-2 formDatosE">
                     <input type="text" name="area" class="form-control"placeholder="Area a la que pertenece" require>
@@ -129,7 +129,7 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
                     <input type="texttarea" name="observaciones" class="form-control lg">                    
                 </div>
                 <div class="col-8 py-2 formDatosE">
-                   <h5>🔅 campos obligatorios</h5> 
+                   <h5>* campos obligatorios</h5> 
                 </div>
                 <div class="col-8 pt-2 pb-4 formDatosE">
                     <input type="submit" name="submit-E" class="btn btn-success sm">
@@ -153,27 +153,27 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edicion Empleados</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       <div class="col-8 pt-4 pb-2 formDatosE">
-                    <label for="identificacion">Identificacion 🔅</label>
+                    <label for="identificacion">Identificacion *</label>
                 </div>
                 <div class="col-8 py-2 formDatosE">
                 <input type="hidden" name="idE" id="idE"class="form-control" placeholder="Nº  identificacion" >
                     <input type="text" name="identificacionE" id="identificacionE"class="form-control" placeholder="Nº  identificacion" >
                 </div>
                 <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Nombre 🔅</label>
+                    <label for="identificacion">Nombre *</label>
                 </div>
                 <div class="col-8 py-2 formDatosE">
                     <input type="text" name="nombreE" id="nombreE"class=" form-control"placeholder="Nombre del Empleado" >
                 </div>
                 <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Area 🔅</label>
+                    <label for="identificacion">Area *</label>
                 </div>
                 <div class="col-8 py-2 formDatosE">
                     <input type="text" name="areaE" id="areaE"class="form-control"placeholder="Area a la que pertenece" >
@@ -185,7 +185,7 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
                     <input type="texttarea" name="observacionesE" id="observacionesE"class="form-control lg">                    
                 </div>
                 <div class="col-8 py-2 formDatosE">
-                   <h5>🔅 campos obligatorios</h5> 
+                   <p>* campos obligatorios</p> 
                 </div>
       </div>
       <div class="modal-footer">
