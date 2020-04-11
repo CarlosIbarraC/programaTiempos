@@ -1,9 +1,7 @@
 
 
 <div class="container">
-    <div><button class="btn btn-warning mt-3">
-    <a href="hojaDeTrabajo.php">Administracion</a>
-    </button></div>
+   
 </div>
 <div class="col-sm-12">
 
@@ -14,7 +12,7 @@
 
     <table class='table table-striped tabledark '>
         <tr>
-            <thead class=" bg-dark text-warning">
+            <thead class="bgTableHead text-warning">
                 <td>id-empleado</td>
                 <td>Nombre</td>
                 <td>area</td>
@@ -78,8 +76,8 @@ function editarTiempos(datosP){
   $('#areaP').val(d[2]);
   $('#fechaP').val(d[4]);
   $('#estadoP').val(d[3]);  
-  $('#horaP').val(d[5]);
- 
+  var k=$('#horaP').val(d[5]);
+  console.log(k);
 }
 </script>
 <!-- <script>

@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-        <table class='table table-striped table-dark table-bordered'>       
+        <table class='table table-striped tabledark'>       
             <tr>
             <thead class=" bg-dark text-warning">
                 <th scope="col">id-Empleado</th>                

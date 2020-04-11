@@ -36,11 +36,11 @@
     <h2 class="text-center text-warning py-4">Tabla dinamica Tiempos de <?php DatosNombre($id,'titulo')?>
     </h2>
     <caption><button class="btn btn-warning mb-4" data-toggle="modal" data-target="#exampleModal"> Agregar Faltante
-            <span class="material-icons">build </span></button></caption>
+            <i class="material-icons llave">build </i></button></caption>
 
-    <table class='table table-striped table-dark table-bordered'>
+    <table class='table table-striped tabledark '>
         <tr>
-            <thead class=" bg-dark text-warning">
+            <thead class=" bgTableHead text-warning text-center">
                 <td>Dia</td>
                 <td>Programado</td>
                 <td>Edicion</td>
@@ -65,15 +65,19 @@
                     <form action="cambiarEstado.php" method="post">
                         <input type="hidden" name="idEdicion" value="<?php echo  $fila['id']?>" />
                         <input type="hidden" name="estadoEdicion" value="<?php echo $fila['estado']?>" />
-                        <button type="submit" class="btn btn-warning material-icons">
-                            <i>redo</i>
-                        </button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning material-icons ">
+                                <i>redo</i>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </td>
             <td>
-                <button type="" class="btn btn-warning material-icons"
-                    onclick="preguntaSiNoTiempos(<?php echo  $fila['id']?>)"><span>delete_forever</span></button>
+                <div class="text-center">
+                    <button type="" class="btn btn-warning material-icons"
+                        onclick="preguntaSiNoTiempos(<?php echo  $fila['id']?>)"><span>delete_forever</span></button>
+                </div>
             </td>
         </tr>
 

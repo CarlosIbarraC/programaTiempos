@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>manejo de tiempos</title>
     <meta name="viewport" content="width=device-width, user-scalable=no,
 	 initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -10,7 +10,7 @@
     <link href='stylos\style.css' rel='stylesheet' type='text/css'>
     <link href='js/alertify.min.css' rel='stylesheet' type='text/css'>
     <link href='js/themes/default.min.css' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
     <script src="js/alertify.js"></script>
     <script src="js/bootstrap.js"></script>
@@ -80,135 +80,150 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
 
 
 ?>
- 
+
 <!-- ------------------------------------inserta datos nuevos--------------------------  -->
+
 <body>
+    <div class="container ">
+        <div class="img-fluid portada pl-3">
+            <img src="img/caratula-2.png" alt="">
+        </div>
+    </div>
 
     <div class="container">
 
         <form action="cargarEmpleados.php" class="form-group" method="post" enctype="multipart/form-data">
             <div class="row mx-0">
-                <div class="col-12 col-sm-6 my-2">
-                <label for="" class="text-warning">⚠ Si desea subir de un archivo CSV separado por comas, por favor siga el orden de la tabla (id-empleado, nombre, area, observaciones)</label>
+                <div class="col-6 col-sm-6 my-2">
+                    <label for="" class="text-warning">⚠ Si desea subir de un archivo CSV separado por comas, por favor
+                        siga el orden de la tabla (id-empleado, nombre, area, observaciones)</label>
                     <input type="file" name="archivoE" class="form-control tn btn-info  mb-4 px-3 py-1" />
                 </div>
-                <div class="col-6 mp-0">
-                    <input type="submit" value="SUBIR ARCHIVO" class=" btn btn-success form-group  my-4 px-3 py-2" name="enviarE">
+                <div class="col-6 mx-auto">
+                   
+                        <input type="submit" value="SUBIR ARCHIVO" class=" btn btn-success form-group  ml-5"
+                            name="enviarE">
+                    
                 </div>
             </div>
         </form>
 
     </div>
-    
-    <div class="container aparecer">       
-             
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>"class="FormularioE form-group" method="post">
+
+    <div class="container aparecer">
+
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="FormularioE form-group" method="post">
             <h3 class="py-2 text-center">Ingreso de Empleados Nuevos</h3>
-                <div class="col-8 pt-4 pb-2 formDatosE">
-                    <label for="identificacion">Identificacion *</label>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <input type="number" name="identificacion" class="form-control" placeholder="Nº  identificacion" require>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Nombre *</label>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <input type="text" name="nombre" class=" form-control"placeholder="Nombre del Empleado" require>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Area *</label>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <input type="text" name="area" class="form-control"placeholder="Area a la que pertenece" require>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Observaciones </label>
-                </div>                
-                <div class="col-8 pt-2 pb-4 formDatosE">
-                    <input type="texttarea" name="observaciones" class="form-control lg">                    
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                   <h5>* campos obligatorios</h5> 
-                </div>
-                <div class="col-8 pt-2 pb-4 formDatosE">
-                    <input type="submit" name="submit-E" class="btn btn-success sm">
-                </div>
-            </form>
+            <div class="col-8 pt-4 pb-2 formDatosE">
+                <label for="identificacion">Identificacion *</label>
+            </div>
+            <div class="col-8 py-2 formDatosE">
+                <input type="number" name="identificacion" class="form-control" placeholder="Nº  identificacion"
+                    require>
+            </div>
+            <div class="col-8 py-2 formDatosE">
+                <label for="identificacion">Nombre *</label>
+            </div>
+            <div class="col-8 py-2 formDatosE">
+                <input type="text" name="nombre" class=" form-control" placeholder="Nombre del Empleado" require>
+            </div>
+            <div class="col-8 py-2 formDatosE">
+                <label for="identificacion">Area *</label>
+            </div>
+            <div class="col-8 py-2 formDatosE">
+                <input type="text" name="area" class="form-control" placeholder="Area a la que pertenece" require>
+            </div>
+            <div class="col-8 py-2 formDatosE">
+                <label for="identificacion">Observaciones </label>
+            </div>
+            <div class="col-8 pt-2 pb-4 formDatosE">
+                <input type="texttarea" name="observaciones" class="form-control lg">
+            </div>
+            <div class="col-8 py-2 formDatosE">
+                <h5>* campos obligatorios</h5>
+            </div>
+            <div class="col-8 pt-2 pb-4 formDatosE">
+                <input type="submit" name="submit-E" class="btn btn-success sm">
+            </div>
+        </form>
 
-       
+
     </div>
-    
+
     <div class="container">
-    
-       <div id="tablaEmpleados">
-       </div>
-    </div>
-  <!--   ----------------------------------inicio modal--------------------------- -->
 
-   
-
-<!-- Modal -->
-<div class="modal fade" id="modalEmpleados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edicion Empleados</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="col-8 pt-4 pb-2 formDatosE">
-                    <label for="identificacion">Identificacion *</label>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                <input type="hidden" name="idE" id="idE"class="form-control" placeholder="Nº  identificacion" >
-                    <input type="text" name="identificacionE" id="identificacionE"class="form-control" placeholder="Nº  identificacion" >
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Nombre *</label>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <input type="text" name="nombreE" id="nombreE"class=" form-control"placeholder="Nombre del Empleado" >
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Area *</label>
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <input type="text" name="areaE" id="areaE"class="form-control"placeholder="Area a la que pertenece" >
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                    <label for="identificacion">Observaciones </label>
-                </div>                
-                <div class="col-8 pt-2 pb-4 formDatosE">
-                    <input type="texttarea" name="observacionesE" id="observacionesE"class="form-control lg">                    
-                </div>
-                <div class="col-8 py-2 formDatosE">
-                   <p>* campos obligatorios</p> 
-                </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal"  id="editardatos">Save changes</button>
-      </div>
+        <div id="tablaEmpleados">
+        </div>
     </div>
-  </div>
-</div>
+    <!--   ----------------------------------inicio modal--------------------------- -->
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalEmpleados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edicion Empleados</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-8 pt-4 pb-2 formDatosE">
+                        <label for="identificacion">Identificacion *</label>
+                    </div>
+                    <div class="col-8 py-2 formDatosE">
+                        <input type="hidden" name="idE" id="idE" class="form-control" placeholder="Nº  identificacion">
+                        <input type="text" name="identificacionE" id="identificacionE" class="form-control"
+                            placeholder="Nº  identificacion">
+                    </div>
+                    <div class="col-8 py-2 formDatosE">
+                        <label for="identificacion">Nombre *</label>
+                    </div>
+                    <div class="col-8 py-2 formDatosE">
+                        <input type="text" name="nombreE" id="nombreE" class=" form-control"
+                            placeholder="Nombre del Empleado">
+                    </div>
+                    <div class="col-8 py-2 formDatosE">
+                        <label for="identificacion">Area *</label>
+                    </div>
+                    <div class="col-8 py-2 formDatosE">
+                        <input type="text" name="areaE" id="areaE" class="form-control"
+                            placeholder="Area a la que pertenece">
+                    </div>
+                    <div class="col-8 py-2 formDatosE">
+                        <label for="identificacion">Observaciones </label>
+                    </div>
+                    <div class="col-8 pt-2 pb-4 formDatosE">
+                        <input type="texttarea" name="observacionesE" id="observacionesE" class="form-control lg">
+                    </div>
+                    <div class="col-8 py-2 formDatosE">
+                        <p>* campos obligatorios</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="editardatos">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
-$(document).ready(function() {
-    $('#tablaEmpleados').load('tablaEmpleados.php');
+    $(document).ready(function() {
+        $('#tablaEmpleados').load('tablaEmpleados.php');
 
-    
-    
-});
-</script>
-<script>
-$(document).ready(function() {
-$('#editardatos').click(function(){
-        guardarEdicionEmpleado();
+
 
     });
-});
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#editardatos').click(function() {
+            guardarEdicionEmpleado();
 
-</script>
+        });
+    });
+    </script>

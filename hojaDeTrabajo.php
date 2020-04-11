@@ -29,12 +29,25 @@ $id=$_SESSION['Empleado'];
 ?>
 
 <body>
-    <div class="container mr-0">
-        <div class="row mx-0">
-        <button class="btn-sm btn-dark col-6 my-4 px-3 mx-auto"><a href="cargarEmpleados.php" class="text-warning text-left">Listado Empleados</a></button>
-        <button class="btn-sm btn-warning text-dark col-6 my-4 px-3 mx-auto"><a href="hojaDeProgramacion.php" class="text-dark text-left">Programacion</a></button>
+    <div class="container ">
+        <div class="img-fluid portada pl-3">
+            <img src="img/caratula-2.png" alt="">
         </div>
-    </div>   
+    </div>
+<div class="container">
+        <div class="d-flex justify-content-left">
+            <div class="col">
+                <button class="btn btn-primary  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
+                        class="text-warning text-left">Listado Empleados</a></button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary my-4 px-3 mx-auto">
+                    <a href="hojaDeProgramacion.php">Programacion</a>
+                </button>
+            </div>
+
+        </div>
+    </div>>   
     
     <!-- modal para ingreso de entradas -->
     <div class="container">
