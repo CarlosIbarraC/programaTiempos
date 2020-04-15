@@ -85,21 +85,23 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
 
 <body>
     <div class="container ">
-        <div class="img-fluid portada pl-3">
-            <img src="img/caratula-2.png" alt="">
+        <div class="img-fluid  pl-3 portada">
+            <img src="img/caratula-2.png" alt="" class="portada">
         </div>
     </div>
 
-    <div class="container">
+    <div class="container portada">
 
         <form action="cargarEmpleados.php" class="form-group" method="post" enctype="multipart/form-data">
             <div class="row mx-0">
-                <div class="col-6 col-sm-6 my-2">
+                <div class="col-12 col-sm-6 my-2">
+                <p class="text-warning">⚠</p>    
+                <input type="file" name="archivoE" class="form-control tn btn-info  mb-4 px-3 py-1" />
                     <label for="" class="text-warning">⚠ Si desea subir de un archivo CSV separado por comas, por favor
                         siga el orden de la tabla (id-empleado, nombre, area, observaciones)</label>
-                    <input type="file" name="archivoE" class="form-control tn btn-info  mb-4 px-3 py-1" />
+                   
                 </div>
-                <div class="col-6 mx-auto">
+                <div class="col mx-auto">
                    
                         <input type="submit" value="SUBIR ARCHIVO" class=" btn btn-success form-group  ml-5"
                             name="enviarE">
@@ -108,12 +110,34 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
             </div>
         </form>
 
+    </div> 
+   
+
+    <div class="container">
+
+        <div id="tablaEmpleados">
+        </div>
     </div>
+   <!--  -------------------------------------Modal Ingreso nuevo empleado---------------------- -->
+  
 
-    <div class="container aparecer">
 
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="FormularioE form-group" method="post">
-            <h3 class="py-2 text-center">Ingreso de Empleados Nuevos</h3>
+<!-- Modal -->
+<div class="modal fade" id="IngresoNuevoE" tabindex="-1" role="dialog" aria-labelledby="IngresoNuevoELabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " id="IngresoNuevoELabel">Ingreso de Empleados Nuevos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container" id="forEmpleados">
+
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class=" form-group" method="post">
+            
             <div class="col-8 pt-4 pb-2 formDatosE">
                 <label for="identificacion">Identificacion *</label>
             </div>
@@ -142,20 +166,23 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
             <div class="col-8 py-2 formDatosE">
                 <h5>* campos obligatorios</h5>
             </div>
-            <div class="col-8 pt-2 pb-4 formDatosE">
+           <!--  <div class="col-8 pt-2 pb-4 formDatosE">
                 <input type="submit" name="submit-E" class="btn btn-success sm">
-            </div>
-        </form>
-
+            </div> -->
+       
+    
 
     </div>
-
-    <div class="container">
-
-        <div id="tablaEmpleados">
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" name="submit-E"class="btn btn-primary">Guardar Ingreso</button>
+      </div>
+      </form>
     </div>
-    <!--   ----------------------------------inicio modal--------------------------- -->
+  </div>
+</div>
+    <!--   ----------------------------------inicio modal Edicion--------------------------- -->
 
 
 
@@ -205,8 +232,7 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="editardatos">Save
-                        changes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="editardatos">Guardar Ingreso</button>
                 </div>
             </div>
         </div>
@@ -223,6 +249,15 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
     $(document).ready(function() {
         $('#editardatos').click(function() {
             guardarEdicionEmpleado();
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#empleadosN').click(function() {
+            $('#forEmpleados').removeClass("aparecer");
+            $('#empleadosN').addClass("aparecer");
 
         });
     });

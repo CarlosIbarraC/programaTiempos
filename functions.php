@@ -133,28 +133,24 @@ function select(){
         <div class="col-12">
             <label for="empleado" class="text-warning">selecciona Empleado</label>
         </div>
-
         <div class="col-12">
             <select class=" bg-warning " id="inputGroupSelect01" name="empleado">
                 <option value="">Despliegue</option>
                 <?php
-				   	   			while($fila = $ejecutarE->fetch_assoc()) {
-				   	   				?>
+				   	while($fila = $ejecutarE->fetch_assoc()) {
+				?>
                 <option class="font-weight-bold" value="<?php echo $fila['id_empleado']?>"><?php echo $fila['nombre']?>
                 </option>
-
-                <?php
-				   	   		
-				   	   			}
-				   	   			
-				   	   		    ?>
+                <?php				   	   		
+				   	}				   	   			
+				?>
             </select>
         </div>
     </div>
 </div>
 
 <?php
-}
+}   
 
 
 function Inconsistencias(){
@@ -191,7 +187,7 @@ function Inconsistencias(){
 		if($n==0 && $fila2[4]=="Salida"){
           ?>
     <tr>
-        <td class="text-warning" >
+        <td class="text-warning">
             <?php
 					echo "inconsistencia de ".$fila2[2]." el ".$fila2[3]."<br>";
              ?>
@@ -245,39 +241,37 @@ function fechas(){
 	$ejecutar = mysqli_query($conexion,$sentencia);
 	while($fila = $ejecutar->fetch_array()) {
 		$idEmpleado=$fila[0];
-		$area=$fila[1];
-	?>
-	
+		$area=$fila[1];		
+		$fechaSalida=new DateTime("20-05-2020");
+		$fechaEntrada= new DateTime("12-05-2020");
 
-	<?php	
-	$fechaEntrada= new DateTime("12-05-2020");
-	$fechaSalida=new DateTime("20-05-2020");
-	while ( $fechaEntrada < $fechaSalida) {
+	     while ( $fechaEntrada < $fechaSalida) {
 		
-         $fechaEntrada->add(new DateInterval('P1D'));
-		 $fechaEntrada->format('d-m-Y') ;
-		 $fechaT= date($fechaEntrada->format('Y-m-d') );
-		 $n=0; $y=1;
-		 while($n<=$y){
-		 if($n==0){
-			  $entrada= "Entrada";
-			  $cadena = "12:45 a.m.";
-              $cadena = strtotime($cadena);
-              $cadena = date("H:i", $cadena);
-			  $seguro=$idEmpleado.$fechaT.$cadena;
-		 }else if($n==1){
-			 $entrada="Salida";
-			 $cadena = "6:45 p.m.";
-              $cadena = strtotime($cadena);
-			  $cadena = date("H:i", $cadena);
-			  $seguro=$idEmpleado.$fechaT.$cadena;
-		 }
+             $fechaEntrada->add(new DateInterval('P1D'));
+		     $fechaEntrada->format('d-m-Y') ;
+		     $fechaT= date($fechaEntrada->format('Y-m-d') );
+			 $n=0; $y=1;
+			 
+		     while($n<=$y){
+		     if($n==0){
+		    	  $entrada= "Entrada";
+		    	  $cadena = "12:45 a.m.";
+                  $cadena = strtotime($cadena);
+                  $cadena = date("H:i", $cadena);
+		    	  $seguro=$idEmpleado.$fechaT.$cadena;
+		     }else if($n==1){
+		    	 $entrada="Salida";
+		    	 $cadena = "6:45 p.m.";
+                 $cadena = strtotime($cadena);
+		    	 $cadena = date("H:i", $cadena);
+		    	 $seguro=$idEmpleado.$fechaT.$cadena;
+		     }
 		$n=$n+1;
 		$sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,area) values ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro','$area')  ";
 		$ejecutar2 = mysqli_query($conexion,$sentencia2);
 		
 		 }
-	}
+	    }
 	}
 } /* --------------fin funcion de insertar programacion ------------------------ */	
 
@@ -311,6 +305,33 @@ function conversionDias($fecha){
 	}
 	
 }
+function selectArea(){
+	global $conexion;
+	$sentencia = "SELECT area FROM nombresempleados ";
+	$ejecutarE = mysqli_query($conexion,$sentencia);
+	?>
 
- ?>
- 
+<div class="input-group">
+    <div class="row">
+        <div class="col-12">
+            <label for="empleado" class="text-warning">selecciona el area</label>
+        </div>
+        <div class="col-12">
+            <select class=" bg-warning " id="SelectArea" name="SelectArea" REQUIRED>
+                <option value="">Despliegue</option>
+                <?php
+				   	while($fila = $ejecutarE->fetch_assoc()) {
+				?>
+                <option class="font-weight-bold" value="<?php echo $fila['area']?>"><?php echo $fila['area']?>
+                </option>
+                <?php				   	   		
+				   	}				   	   			
+				?>
+            </select>
+        </div>
+    </div>
+</div>
+<?php
+
+}   
+?>

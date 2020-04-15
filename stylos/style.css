@@ -4,12 +4,19 @@
 }
 body{
     background: rgb(17, 28, 44);
+    animation-name: example;
+    animation-duration: 3s;
 }
 .colorEntrada{
     background-color: rgba(41, 62, 88, 0.904);
 }
 .colorSalida{
     background-color: rgb(30, 42, 65);
+}
+.portada{
+    display:block;
+    animation-name: slidein;
+    animation-duration: 2s;
 }
 form.FormularioE{
     margin: auto;
@@ -21,7 +28,24 @@ div.formDatosE{
 }
 .aparecer{
     display: none;
+   
 }
+@keyframes example {
+    from {background-color: rgb(0, 39, 88);}
+    to {background-color:rgb(17, 28, 44);}
+  }
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%; 
+    }
+    
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
 .modal-body{
     background-color: rgb(6, 30, 53);
     color: rgba(241, 161, 42, 0.904);
@@ -40,7 +64,7 @@ div.formDatosE{
 .btn-primary{
     background-color: rgb(7, 42, 75)!important;
     border: none;
-    color: rgba(83, 82, 81, 0.904);
+    color: rgba(238, 186, 14, 0.904);
 
 }
 .tabledark{
@@ -54,6 +78,7 @@ div.formDatosE{
 .select2-selection__rendered{
     background-color: rgb(238, 206, 24);
     border-radius: 4px;
+    padding: 3px;
   
     
 }
@@ -65,9 +90,12 @@ div.formDatosE{
     
 }
 .select2-results {
-    background-color: rgb(56, 79, 114);
+    background-color: rgb(223, 173, 37);
 }
 i.llave{
     font-size: 100%;
     
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected]{
+    background-color: rgb(7, 42, 75)!important;
 }

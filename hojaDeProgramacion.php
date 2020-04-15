@@ -25,9 +25,9 @@ require_once("functions.php");
 ?>
 
 <body>
-    <div class="container ">
-        <div class="img-fluid portada pl-3">
-            <img src="img/caratula-2.png" alt="">
+<div class="container ">
+        <div class="img-fluid  pl-3 portada">
+            <img src="img/caratula-2.png" alt="" class="portada">
         </div>
     </div>
     <div class="container ">
@@ -38,7 +38,12 @@ require_once("functions.php");
             </div>
             <div class="col">
                 <button class="btn btn-primary my-4 px-3 mx-auto">
-                    <a href="hojaDeTrabajo.php">hoja Tiempos Reloj</a>
+                    <a href="hojaDeTrabajo.php" class="text-warning">hoja Tiempos Reloj</a>
+                </button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary my-4 px-3 mx-auto">
+                    <a href="formularioProgramacion.php" class="text-warning">Formulario de Programacion</a>
                 </button>
             </div>
 

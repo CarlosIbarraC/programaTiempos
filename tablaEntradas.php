@@ -20,9 +20,8 @@
 <div class="container">
 
     <?php
-                   select() 
-           
-        ?>
+    select()           
+    ?>
 
 </div>
 <div class="container mt-3">
@@ -110,3 +109,4 @@ $(document).ready(function() {
     });
 
 });
+</script>

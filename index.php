@@ -18,6 +18,26 @@
     <link href='css/select2.css' rel='stylesheet' type='text/css'>
     <script src="js/select2.js"></script>
 </head>
+<div class="container ">
+        <div class="img-fluid  pl-3 portada">
+            <img src="img/caratula-2.png" alt="" class="portada">
+        </div>
+    </div>
+    <div class="container">
+        <div class="d-flex justify-content-left">
+            <div class="col">
+                <button class="btn btn-primary  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
+                        class="text-warning text-left">Listado Empleados</a></button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary my-4 px-3 mx-auto">
+                    <a href="hojaDeProgramacion.php">Programacion</a>
+                </button>
+            </div>
+
+        </div>
+    </div>>
+
 <?php
 if (isset($_POST["enviar"])) {//nos permite recepcionar una variable que si exista y que no sea null
 	require_once("conexion.php");

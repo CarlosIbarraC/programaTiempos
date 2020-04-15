@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>manejo de tiempos</title>
     <meta name="viewport" content="width=device-width, user-scalable=no,
 	 initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -10,7 +10,7 @@
     <link href='stylos\style.css' rel='stylesheet' type='text/css'>
     <link href='js/alertify.min.css' rel='stylesheet' type='text/css'>
     <link href='js/themes/default.min.css' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
     <script src="js/alertify.js"></script>
     <script src="js/bootstrap.js"></script>
@@ -30,11 +30,12 @@ $id=$_SESSION['Empleado'];
 
 <body>
     <div class="container ">
-        <div class="img-fluid portada pl-3">
-            <img src="img/caratula-2.png" alt="">
+        <div class="img-fluid  pl-3 portada">
+            <img src="img/caratula-2.png" alt="" class="portada">
         </div>
     </div>
-<div class="container">
+    </div>
+    <div class="container">
         <div class="d-flex justify-content-left">
             <div class="col">
                 <button class="btn btn-primary  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
@@ -42,13 +43,18 @@ $id=$_SESSION['Empleado'];
             </div>
             <div class="col">
                 <button class="btn btn-primary my-4 px-3 mx-auto">
-                    <a href="hojaDeProgramacion.php">Programacion</a>
+                    <a href="hojaDeProgramacion.php" class="text-warning">Tabla de Programacion</a>
+                </button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary my-4 px-3 mx-auto">
+                    <a href="formularioProgramacion.php" class="text-warning">formulario de Programacion</a>
                 </button>
             </div>
 
         </div>
-    </div>>   
-    
+    </div>>
+
     <!-- modal para ingreso de entradas -->
     <div class="container">
         <div id="tablaEntradas">
@@ -71,12 +77,10 @@ $id=$_SESSION['Empleado'];
 
                             <input type="text" name="name" id="Empleado" class="form-control"
                                 value="<?php  DatosNombre($id,'titulo')?>" readonly><br>
-                            <input type="hidden" name="numero" id="numero"
-                                value="<?php  DatosNombre($id,'id')?>">
-                            <input type="hidden" name="nombre" id="nombre"
-                                value="<?php  DatosNombre($id,'nombre')?>">
+                            <input type="hidden" name="numero" id="numero" value="<?php  DatosNombre($id,'id')?>">
+                            <input type="hidden" name="nombre" id="nombre" value="<?php  DatosNombre($id,'nombre')?>">
                             <label class="text-warning">dd/mm/AAAA hh:mm a.m./p.m.</label>
-                            <input type="datetime" class="form-control" name="fecha" id="fecha"><br>
+                            <input type="datetime-local" class="form-control" name="fecha" id="fecha"><br>
 
 
                             <div class="form-check " class="form-control">
@@ -121,6 +125,7 @@ $(document).ready(function() {
         numero = $('#numero').val();
         nombre = $('#nombre').val();
         fecha = $('#fecha').val();
+        console.log(fecha);
         estado = $('#FormularioEmpleados input[type=radio]:checked').attr('id');
         if (estado == 'estado1') {
             estado = 'Entrada';
@@ -132,6 +137,4 @@ $(document).ready(function() {
     });
 
 });
-
 </script>
-

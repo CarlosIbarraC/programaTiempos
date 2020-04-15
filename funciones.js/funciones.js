@@ -118,4 +118,28 @@ function eliminarDatosTiempos(id){
  });
  
  }
+ function agregarFormulario(inputfecha1,inputfecha2,SelectArea,diasProgramacion,inputHora1,inputHora2) {
+  cadena =
+    "inputfecha1=" + inputfecha1 +
+    "&inputfecha2=" + inputfecha2 +
+    "&SelectArea=" + SelectArea +
+    "&diasProgramacion=" + diasProgramacion +
+    "&inputHora1=" + inputHora1 +
+    "&inputHora2=" + inputHora2 ;
+   
+  $.ajax({
+    type: "POST",
+    url: "datosDeProgramacion.php",
+    data: cadena,
+    success: function(r) {
+      if (r == 1) {
+        console.log(r);
+        alertify.success("salio ok");
+        
+      } else {
+        alertify.error("fallo el servidor");
+      }
+    }
+  });
+}
  
