@@ -17,14 +17,16 @@ $cadena = strtotime($cadena);
 $cadena = date("H:i", $cadena);
 echo $cadena."<br />";
 // devuelve 23:45
-$cadena = "13/02/2020 06:07:00 p.m.";
-$cadena = strtotime($cadena);
-$cadena = date("Y/m/d H:i", $cadena);
+$cadena = "4-01-2020 06:07:00 p.m.";
+$cadena = strtotime('+1 day',strtotime($cadena));
+/* $cadena = date("Y-m-d H:i", $cadena); */
+$cadena = date("w",$cadena);
 echo $cadena."<br />";
 // devuelve 22:45
 $cadena = "9:45 PM";
 $cadena = strtotime($cadena);
 $cadena = date("H:i", $cadena);
+
 echo $cadena."<br />";
 // devuelve 21:45
 $cadena = "12:45 a.m.";

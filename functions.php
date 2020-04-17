@@ -307,7 +307,7 @@ function conversionDias($fecha){
 }
 function selectArea(){
 	global $conexion;
-	$sentencia = "SELECT area FROM nombresempleados ";
+	$sentencia = "SELECT area FROM nombresempleados group by area";
 	$ejecutarE = mysqli_query($conexion,$sentencia);
 	?>
 

@@ -14,7 +14,7 @@ body{
     background-color: rgb(30, 42, 65);
 }
 .portada{
-    display:block;
+    /* display:block; */
     animation-name: slidein;
     animation-duration: 2s;
 }

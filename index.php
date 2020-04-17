@@ -19,8 +19,8 @@
     <script src="js/select2.js"></script>
 </head>
 <div class="container ">
-        <div class="img-fluid  pl-3 portada">
-            <img src="img/caratula-2.png" alt="" class="portada">
+<div class="  pl-3 portada">
+            <img src="img/caratula-2.png" alt="" class="img-fluid">
         </div>
     </div>
     <div class="container">

@@ -12,48 +12,56 @@ $horaEntrada = strtotime($horaEntrada);
 $horaEntrada = date("H:i", $horaEntrada);
 $horaSalida = strtotime($horaSalida);
 $horaSalida = date("H:i", $horaSalida);
+/* $fechaSalida=new DateTime($fechaSalida); 
+$fechaEntrada= new DateTime($fechaEntrada);
+ */
+$fechaSalida= strtotime($fechaSalida);
+$fechaSalida= date("Y-m-d",$fechaSalida);
+ 
+/* echo $fechaSalida,$fechaEntrada;
+ */
 
-
-
-/* echo ($fechaSalida.",".$fechaEntrada.",".$area.",".$horaEntrada.",".$horaSalida.",".$diasProgramacion);
-echo ($r="realizado"); */
-global $conexion;	
-	$sentencia = "SELECT id_empleado,area FROM nombresempleados order by nombre   ";
+ global $conexion;	
+	$sentencia = "SELECT * FROM nombresempleados where area='$area' ";
 	$ejecutar = mysqli_query($conexion,$sentencia);
 	while($fila = $ejecutar->fetch_array()) {
-		$idEmpleado=$fila[0];
-		$area=$fila[1];		
-		$fechaSalida=new DateTime($fechaSalida);
-		$fechaEntrada= new DateTime($fechaEntrada);
-
-	     while ( $fechaEntrada < $fechaSalida) {
+		$idEmpleado=$fila['id_empleado'];
+		$areaP=$fila['area'];
+		$fechaI=$fechaEntrada;
+		$fechaI=strtotime('-1 day',strtotime($fechaI));;
+	    $fechaI=date("Y-m-d", $fechaI); 
+		$fechaS=$fechaSalida;		
 		
-             $fechaEntrada->add(new DateInterval('P1D'));
-		     $fechaEntrada->format('d-m-Y') ;
-		     $fechaT= date($fechaEntrada->format('Y-m-d') );
+
+	    while ( $fechaI < $fechaS) {
+		
+			 $fechaI=strtotime('+1 day',strtotime($fechaI));
+			 $fechaLV=$fechaI;
+		     $fechaI=date("Y-m-d", $fechaI); 
+			 $fechaT=$fechaI  ;
+			 $fechaLV=date("w",$fechaLV);
 			 $n=0; $y=1;
-			 
-		     while($n<=$y){
+			 if($fechaLV==6 || $fechaLV==0){
+			}else{
+		    while($n<=$y){
 		     if($n==0){
 		    	  $entrada= "Entrada";
-		    	  $cadena = "12:45 a.m.";
-                  $cadena = strtotime($cadena);
-                  $cadena = date("H:i", $cadena);
-		    	  $seguro=$idEmpleado.$fechaT.$cadena;
+		    	  $cadena = $horaEntrada;                  
+		    	  $seguro=$idEmpleado.$fechaT.$entrada.$areaP;
 		     }else if($n==1){
 		    	 $entrada="Salida";
-		    	 $cadena = "6:45 p.m.";
-                 $cadena = strtotime($cadena);
-		    	 $cadena = date("H:i", $cadena);
-		    	 $seguro=$idEmpleado.$fechaT.$cadena;
+		    	 $cadena = $horaSalida;                
+		    	 $seguro=$idEmpleado.$fechaT.$entrada.$areaP;
 		     }
 		$n=$n+1;
-		$sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,area) values ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro','$area')  ";
+		$sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,area) values ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro','$areaP')  ";
 		$ejecutar2 = mysqli_query($conexion,$sentencia2);
 		
 		 }
-	    }
+}
+		}
 	}
-
-return $ejecutar2;
+	
+ 
+	/*header('Location: formularioProgramacion.php'); */
 ?>

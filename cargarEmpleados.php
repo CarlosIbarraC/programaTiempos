@@ -85,8 +85,8 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
 
 <body>
     <div class="container ">
-        <div class="img-fluid  pl-3 portada">
-            <img src="img/caratula-2.png" alt="" class="portada">
+    <div class="  pl-3 portada">
+            <img src="img/caratula-2.png" alt="" class="img-fluid">
         </div>
     </div>
 
@@ -96,7 +96,7 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
             <div class="row mx-0">
                 <div class="col-12 col-sm-6 my-2">
                 <p class="text-warning">⚠</p>    
-                <input type="file" name="archivoE" class="form-control tn btn-info  mb-4 px-3 py-1" />
+                <input type="file" name="archivoE" class="form-control tn btn-success  mb-4 px-3 py-1" />
                     <label for="" class="text-warning">⚠ Si desea subir de un archivo CSV separado por comas, por favor
                         siga el orden de la tabla (id-empleado, nombre, area, observaciones)</label>
                    

@@ -33,7 +33,7 @@
            
            global $conexion;
            
-            $sentencia = "SELECT * FROM nombresempleados,programacion where nombresempleados.id_empleado = programacion.idEmpleado  and programacion.area = 'VENTAS'";
+            $sentencia = "SELECT * FROM nombresempleados,programacion where nombresempleados.id_empleado = programacion.idEmpleado  and programacion.area = 'CARDAS'";
             $ejecutar = $conexion->query($sentencia);
              while($fila = $ejecutar->fetch_assoc()) { 
                  
