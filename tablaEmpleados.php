@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-sm-12">
 
-        <h2 class="text-center text-warning my-4">Listado de Empleados<?php/* DatosNombre('87121961','titulo')*/?></h2>
+        <h2 class="text-center text-warning my-4">Listado de Empleados<?php ?></h2>
         <div class="container">
             <div class="row mx-0 flex-row ">
                 <div class="formDatosE  col-6">
