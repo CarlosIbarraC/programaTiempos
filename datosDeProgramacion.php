@@ -1,8 +1,10 @@
 
 <?php
+session_start();
 require_once "conexion.php";
 require_once "functions.php"; 
 $fechaEntrada=$_POST["Inputfecha1"];
+
 $fechaSalida=$_POST["Inputfecha2"];
 $area=$_POST["SelectArea"];
 $diasProgramacion=$_POST["diasProgramacion"];
@@ -27,6 +29,10 @@ $horaSalidaD = date("H:i", $horaSalidaD);
 
 $fechaSalida= strtotime($fechaSalida);
 $fechaSalida= date("Y-m-d",$fechaSalida);
+$fechaEntradaP=strtotime($fechaEntrada);
+$fechaEntradaP= date("Y-m-d",$fechaEntradaP);
+$_SESSION['fechaEntrada']=$fechaEntradaP;
+$_SESSION['fechaSalida']=$fechaSalida;
  
  global $conexion;	
 	$sentencia = "SELECT * FROM nombresempleados where area='$area' ";

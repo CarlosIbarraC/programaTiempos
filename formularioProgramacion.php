@@ -15,12 +15,25 @@
 <script src="js/select2.js"></script>
 </head>
 <?php
+
 /* 
 ------------------------------------inserta datos nuevos-------------------------- */
 
 require_once("conexion.php");
 require_once("functions.php");
+session_start();
+ if(isset($_SESSION['fechaEntrada'])){
+     $fechaProgramacionE=$_SESSION['fechaEntrada'];
 
+ }else{
+    $fechaProgramacionE="";
+ };
+ if(isset($_SESSION['fechaEntrada'])){
+    $fechaProgramacionS=$_SESSION['fechaSalida'];
+
+}else{
+   $fechaProgramacionS="";
+};
 
 ?>
 
@@ -44,14 +57,15 @@ require_once("functions.php");
 
         </div>
     </div>
-    <h2 class="text-warning text-center p-4">Formulario para ingreso de Programacion</h2>
+    <h2 class="text-warning text-center p-4">Formulario para ingreso de Programacion</h2><br>
+    <h2 class="text-warning text-center"><?php echo $fechaProgramacionE?>/<?php echo $fechaProgramacionS?> </h2>
     <div class="container border p-4">
     	
     		<form action="datosDeProgramacion.php" method="post" class="form-group" class="text-warning">
             <div class="row">
                 <div class="col-9 col-sm-6">
         	        <label for="Inputfecha1" class="text-warning">Fecha de Arranque de programacion</label>
-        		<input type="date" class="form-control " name="Inputfecha1" id="Inputfecha1" aria-describedby="fechaEntrada" REQUIRED>
+        		<input type="date" class="form-control " name="Inputfecha1" id="Inputfecha1" aria-describedby="fechaEntrada"  REQUIRED>
         	        <label for="Inputfecha2" class="text-warning">Fecha de Terminacion de programacion</label>
         		<input type="date" class="form-control" id="Inputfecha2" name="Inputfecha2" aria-describedby="fechaSalida" REQUIRED>
         		</div>
@@ -99,10 +113,26 @@ require_once("functions.php");
     		</form>
     	
     </div>
+    <div id="areasProgramadas">
+    </div>
 
 <script>
 $(document).ready(function() {
     $('#SelectArea').select2();
+  
+});
+</script>
+<script>
+var dateControl = document.querySelector('input[type="date"]#Inputfecha1');
+dateControl.value = "<?php echo $fechaProgramacionE?>";
+var dateControl = document.querySelector('input[type="date"]#Inputfecha2');
+dateControl.value = "<?php echo $fechaProgramacionS?>";
+
+ 
+</script>
+<script>
+$(document).ready(function() {
+    $('#areasProgramadas').load('areasProgramadas.php');
   
 });
 </script>
