@@ -2,7 +2,7 @@
 session_start();
 require 'functions.php';
 require 'conexion.php';
-  
+$fechaMax=$_SESSION['fechaSalida'];  
  ?>
 <div class="container mt-4 border">
     <div class="row">
@@ -16,21 +16,16 @@ require 'conexion.php';
                $fechaProgU="";
                global $conexion;
                $ultimaProg="";
-               $sentencia = "SELECT MAX(fechaPrograma) as fecha,area  FROM programacion group by area ";
+               $sentencia = "SELECT fechaPrograma ,area  FROM programacion where fechaPrograma = '$fechaMax' group by area ";
                $ejecutar = $conexion->query($sentencia);
                 while($fila = $ejecutar->fetch_assoc()) { 
-
                ?>
                 <tr>               
                     <td class="text-success text-center py-2"><?php echo $fila['area']?></td>
-                    <td class="text-success text-center py-2"><?php echo $fila['fecha']?></td>
+                    <td class="text-success text-center py-2"><?php echo $fila['fechaPrograma']?></td>
                    
                 </tr>
-                <?php
-                
-                $array[]=$fila['area']."/".$fila['fecha'];
-               
-                
+                <?php            
                 }
             ?>
             </table>
@@ -42,22 +37,23 @@ require 'conexion.php';
                     <td class="text-danger text-center px-2 py-2">Area sin programa</td>
                     
                 </tr>
-                <?php
-                       
+                <?php                  
+             
                $sentencia = "SELECT area    
                FROM nombresempleados  
                EXCEPT   
                SELECT area   
-               FROM programacion" ;
+               FROM programacion where fechaPrograma ='$fechaMax' group by area" ;
 
                $ejecutar = $conexion->query($sentencia);
                 while($fila = $ejecutar->fetch_assoc()) { 
-               ?> 
-                <tr>
-                    <td class="text-danger text-center px-3 py-2"><?php echo $fila['area']?></td>
-                   
+
+                  ?>
+                    <tr>
+                    <td class="text-danger text-center px-3 py-2"><?php echo $fila['area']?></td>                   
                 </tr>
                 <?php
+              
                 }
             ?>
             </table>

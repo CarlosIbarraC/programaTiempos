@@ -28,8 +28,10 @@ session_start();
  }else{
     $fechaProgramacionE="";
  };
- if(isset($_SESSION['fechaEntrada'])){
+ if(isset($_SESSION['fechaSalida'])){
+     
     $fechaProgramacionS=$_SESSION['fechaSalida'];
+    
 
 }else{
    $fechaProgramacionS="";

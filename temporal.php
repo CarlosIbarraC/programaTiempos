@@ -51,10 +51,8 @@ require 'conexion.php';
                FROM  nombresempleados N,programacion P 
                WHERE N.area != P.area group by N.area " ; */             
                $sentencia = "SELECT area    
-               FROM Programacion  
-               EXCEPT   
-               SELECT area   
-               FROM nombresempleados" ;
+               FROM Programacion WHERE fechaPrograma == '$fechaMax'
+               " ;
 
                $ejecutar = $conexion->query($sentencia);
                 while($fila = $ejecutar->fetch_assoc()) { 
