@@ -37,6 +37,7 @@ echo $cadena."<br />";
 $cadena = "20:45:00";
 $cadena = strtotime($cadena);
 $cadena = date("H:i", $cadena);
+$cadena=strtotime($cadena,$cadena);
 echo $cadena."<br />";
 // sigue siendo 20:45 pero sin segundos 
 ?>

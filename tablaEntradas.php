@@ -2,15 +2,20 @@
  require 'functions.php';
  require 'conexion.php';
   session_start();
-  $id=$_SESSION['Empleado'];
+  if(isset($_SESSION['Empleado'])){
+    $id=$_SESSION['Empleado'];
+  }else{
+      $id="";
+  }
+  
  ?>
 
 
 </head>
-<div class="container">
+<div class="container">  
 
     <?php
-                  fechas() ;
+      fechas() ;
            
         ?>
 
@@ -46,10 +51,9 @@
                 <td>Eliminar</td>
             </thead>
         </tr>
-        <?php   
-          
+        <?php       
            
-            $sentencia = "SELECT * FROM empleados where numero = '$id' order by fechaDate  ";
+            $sentencia = "SELECT * FROM empleados where numero = '$id'  order by fechaDate  ";
             $ejecutar = $conexion->query($sentencia);
              while($fila = $ejecutar->fetch_assoc()) {             
                                      
@@ -99,9 +103,7 @@ $(document).ready(function() {
             url: 'crearSession.php',
             success: function(r) {
                 console.log(r);
-                location.reload();
-                /* $('#fotoreferencia').load('fotorreferencia.php');
-                document.location.href = 'fotoreferencia.php#fot'; */
+                location.reload();              
 
             }
         });

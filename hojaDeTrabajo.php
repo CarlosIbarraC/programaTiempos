@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>manejo de tiempos</title>
+    <title>hoja tiempos trabajo</title>
     <meta name="viewport" content="width=device-width, user-scalable=no,
 	 initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href='css/bootstrap.min.css' rel='stylesheet' type='text/css'>
@@ -30,7 +30,7 @@ $id=$_SESSION['Empleado'];
 
 <body>
     <div class="container ">
-    <div class="  pl-3 portada">
+        <div class="  pl-3 portada">
             <img src="img/caratula-2.png" alt="" class="img-fluid">
         </div>
     </div>
@@ -53,7 +53,7 @@ $id=$_SESSION['Empleado'];
             </div>
 
         </div>
-    </div>>
+    </div>
 
     <!-- modal para ingreso de entradas -->
     <div class="container">
@@ -114,27 +114,27 @@ $id=$_SESSION['Empleado'];
 
 </html>
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#tablaEntradas').load('tablaEntradas.php');
-    $('#tdEstado').addClass('colorEntrada');
-});
+    $(document).ready(function () {
+        $('#tablaEntradas').load('tablaEntradas.php');
+        $('#tdEstado').addClass('colorEntrada');
+    });
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#guardarnuevo').click(function() {
-        numero = $('#numero').val();
-        nombre = $('#nombre').val();
-        fecha = $('#fecha').val();
-        console.log(fecha);
-        estado = $('#FormularioEmpleados input[type=radio]:checked').attr('id');
-        if (estado == 'estado1') {
-            estado = 'Entrada';
-        } else {
-            estado = 'Salida';
-        }
+    $(document).ready(function () {
+        $('#guardarnuevo').click(function () {
+            numero = $('#numero').val();
+            nombre = $('#nombre').val();
+            fecha = $('#fecha').val();
+            console.log(fecha);
+            estado = $('#FormularioEmpleados input[type=radio]:checked').attr('id');
+            if (estado == 'estado1') {
+                estado = 'Entrada';
+            } else {
+                estado = 'Salida';
+            }
 
-        agregarDatos(numero, nombre, fecha, estado);
+            agregarDatos(numero, nombre, fecha, estado);
+        });
+
     });
-
-});
 </script>

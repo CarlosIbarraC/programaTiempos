@@ -335,3 +335,31 @@ function selectArea(){
 
 }   
 ?>
+<?php
+function diferenciasDehoras($fechaInicial,$fechaFinal,$franja){
+
+	switch($franja){
+		case "diurnas":
+			echo "lunes".$fechaLarga;
+		break;
+		case "nocturnas":
+			echo "Martes".$fechaLarga;
+		break;
+		case "festivos":
+			echo "Miercoles".$fechaLarga;
+		break;
+		case "festivosN":
+			echo "Jueves".$fechaLarga;
+		break;
+		
+	}
+
+
+}
+function fechaLarga($cadena){
+	$diassemana = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); 
+	$diasx= $diassemana[date('w',strtotime($cadena))]." ".date('d',strtotime($cadena))." de ".$meses[date('n',strtotime($cadena))-1]. " del ".date('Y',strtotime($cadena)) ;
+	echo $diasx;
+}
+?>

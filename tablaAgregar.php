@@ -10,7 +10,8 @@ $nombre = $_POST['nombre'];
 $fecha = $_POST['fecha'];
 $estado = $_POST['estado'];
 $date = date_create($fecha);
-$date= date_format($date, 'd/m/Y H:i:s a');
+$date= date_format($date, 'd-m-Y H:i');
+
 $prueba = $_POST['nombre'].$date."..";
 $prueba= substr($prueba,0,-3);
 
