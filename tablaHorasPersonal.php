@@ -1,7 +1,13 @@
 <?php
+ session_start();
  require 'functions.php';
  require 'conexion.php';
-  session_start();
+
+ $fechaI=$_SESSION['periodoI'];
+ $fechaF=$_SESSION['periodoF'];
+
+ 
+ 
   if(isset($_SESSION['horasEmpleado'])){
     $id=$_SESSION['horasEmpleado'];
   }else{
@@ -9,8 +15,23 @@
   }
   
  ?>
+ <div class="container my-4 ">
+        <div class="col-12 ">
+        <h3 class= "text-center text-warning py-4">PERIODO DE VISUALIZACION</h3>
+            <div class="d-flex justify-content-center">
+                <form action="tablaHorasPersonal.php" method="POST" class="text-center form-control col-4 bg-warning">
+                <label for="periodoI">FECHA INICIAL</label>
+                <input type="date" name="periodoI" id="periodoI" class="form-control mb-4 bg-secondary" value="">
+                <label for="periodof">FECHA FINAL</label>
+                <input type="date" name="periodoF" id="periodoF" class="form-control bg-secondary" value="">
+              
+                </form>
+            </div>
+        </div>
+    </div>
  <div class="container">
     <?php
+   
     select()           
     ?>
     
@@ -35,7 +56,7 @@
             <?php   
                 
               
-                $sentencia = "SELECT * FROM empleados where numero = '$id'  order by fechaDate  ";
+                $sentencia = "SELECT * FROM empleados where numero = '$id' AND fechaDate BETWEEN '$fechaI' AND '$fechaF'  order by fechaDate  ";
                 $ejecutar = $conexion->query($sentencia);
                  while($fila = $ejecutar->fetch_assoc()) {                
                     
@@ -62,24 +83,47 @@
                           $unixSalida=date_format($end, 'U');
                           $unixHorasDia = ($unixSalida-$unixEntrada);
                           $horasDia=($unixHorasDia/3600);
-                          $horasDia= floor($horasDia); 
+                          $horasDia= floor($horasDia); //horas de trabajo por dia.
                           $min=($unixHorasDia/3600);$min=$min-$horasDia; 
-                          $min=$min*60;   
-                          if($min<10){echo $horasDia.",0".$min ;
-                          }else{ echo $horasDia.",".$min ;}
+                          $min=$min*60;                // minutos de trabajo por dia.
+                          $horaEntrada=strtotime($arrayhoras[$i][0]);  //unix dia del registro.                      
+                          $horaEntrada2=date("Y-m-d",$horaEntrada);//dia del registro.                          
+                          $limiteEntrada= strtotime('+6 hour',strtotime($horaEntrada2));//limite 6 am. 
+                          $horasNocturnas=$limiteEntrada-$horaEntrada;//tiempo nocturno unix.
+                          if($min<9.9){echo $horasDia.":0".$min."'" ;
+                          }else{ echo $horasDia.":".$min."'" ;}
                           
                     ?>              
                </td>
-              <td><?php  $horaEntrada=strtotime($arrayhoras[$i][0]);
-                         $horaEntrada=date("H:i",$horaEntrada);
-                         echo $horaEntrada;
-                         echo "-". $limite6=strtotime("6:00");
+              <td class="text-center"><?php 
+                            if($limiteEntrada<$horaEntrada){
+                         echo floor(($unixSalida-$unixEntrada)/3600);
+                         }else{
+                              echo floor(($unixSalida-$limiteEntrada)/3600);
+                         }          
                        
                          
               
               ?></td>
-              <td><?php echo "hora " . strtotime($horaEntrada);  ?></td>
-              <td><?php   ?></td>
+              <td class="text-center">
+                <?php ;                       
+                        if($limiteEntrada>$horaEntrada){                                      
+                            $horasNocturnas=$limiteEntrada-$horaEntrada;                        
+                            if( $horasNocturnas>3300 && $horasNocturnas<5400){
+                                echo "1";
+                            }else{
+                                if(($horasNocturnas-1800)<0){
+                                
+                                 }else{
+                                    echo "min".date("i",$horasNocturnas);
+                                 }
+                            }         
+               
+                        } ?></td>
+              <td><?php 
+              
+              
+              ?></td>
               <td><?php   ?></td>             
                 </tr>   
      <?php 
@@ -112,9 +156,15 @@ $(document).ready(function() {
     $('#inputGroupSelect01').select2();  
     $("#inputGroupSelect01").change(function() {
         var id = $('select[id=inputGroupSelect01]').val();
+        var periodoI=$('#periodoI').val();
+        var periodoF=$('#periodoF').val();
+        
+           
         $.ajax({
             type: "POST",
-            data: 'id=' + id,
+            data: 'id=' + id
+            + '&periodoI=' + periodoI
+            + '&periodoF=' + periodoF,
             url: 'crearSessionHoras.php',
             success: function(r) {
                 console.log(r);
@@ -127,4 +177,15 @@ $(document).ready(function() {
 
 });
 </script>
+<script>
+var dateControl = document.querySelector('input[type="date"]#periodoI');
+dateControl.value = "<?php echo $fechaI?>";
+var dateControl = document.querySelector('input[type="date"]#periodoF');
+dateControl.value = "<?php echo $fechaF?>";
+</script>
 
+<!-- "idE=" + idE + 
+            "&identificacionE=" + id_empleado + 
+            "&nombreE=" + nombre + 
+            "&areaE=" + area + 
+            "&observacionesE=" + observaciones; -->

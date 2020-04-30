@@ -44,6 +44,7 @@
 
         </div>
     </div>
+    
     <div id="tablaHorasPersonal">
     </div>
     <script type="text/javascript">
