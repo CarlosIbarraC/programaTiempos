@@ -10,14 +10,17 @@
         <h2 class="text-center text-warning my-4">Listado de Empleados<?php ?></h2>
         <div class="container">
             <div class="row mx-0 flex-row ">
-                <div class="formDatosE  col-6">
+                <div class="formDatosE  col-4">
                     <a href="hojaDeTrabajo.php"><button class="btn btn-warning  my-4 px-3 btn-md">volver
                             administracion</button></a>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <button type="button" class="btn btn-primary my-4 px-3 btn-md" data-toggle="modal" data-target="#IngresoNuevoE">
                         Ingreso Empleado Nuevo
                     </button>
+                </div>
+                <div class="formDatosE  col-4">
+                    <a href="horasDeTrabajoPersonal.php"><button class="btn btn-warning  my-4 px-3 btn-md"><strong>Horas de Trabajo</strong></button></a>
                 </div>
             </div>
         </div>

@@ -3,16 +3,20 @@
  require 'functions.php';
  require 'conexion.php';
 
- $fechaI=$_SESSION['periodoI'];
- $fechaF=$_SESSION['periodoF'];
-
- 
- 
-  if(isset($_SESSION['horasEmpleado'])){
+ if(isset($_SESSION['periodoI'])){
+    $fechaI=$_SESSION['periodoI'];
+    $fechaF=$_SESSION['periodoF'];
+    
+    } else{
+        $fechaI='';
+        $fechaF='';
+    }    
+   
+   if(isset($_SESSION['horasEmpleado'])){
     $id=$_SESSION['horasEmpleado'];
-  }else{
-      $id="";
-  }
+    
+}else{
+    $id="";}
   
  ?>
  <div class="container my-4 ">
@@ -21,9 +25,9 @@
             <div class="d-flex justify-content-center">
                 <form action="tablaHorasPersonal.php" method="POST" class="text-center form-control col-4 bg-warning">
                 <label for="periodoI">FECHA INICIAL</label>
-                <input type="date" name="periodoI" id="periodoI" class="form-control mb-4 bg-secondary" value="">
+                <input type="date" name="periodoI" id="periodoI" class="form-control mb-4 bg-secondary" value=""REQUIRED>
                 <label for="periodof">FECHA FINAL</label>
-                <input type="date" name="periodoF" id="periodoF" class="form-control bg-secondary" value="">
+                <input type="date" name="periodoF" id="periodoF" class="form-control bg-secondary" value=""REQUIRED>
               
                 </form>
             </div>
@@ -44,19 +48,26 @@
         <table class='table table-striped tabledark '>
             <tr>
                 <thead class=" bgTableHead text-warning text-center">
-                    <td>Dia</td>
+                    <td>Dia*<p>
+                        <small> hora entrada>horaSalida=>nocturno</small>
+                    </p></td>
                     <td>HorasTrabajo</td>
                     <td>Diurnas</td>
+                    <td>minutos/nc</td>
                     <td>Nocturnas</td>
-                    <td>Festivas</td>
-                    <td>FestivasNocturnas</td>
-
+                    <td>Programacion</td>
+                   
                 </thead>
             </tr>
             <?php   
+                $acumuladoUnixD=0;
+                $horasDA=0;
+                $minDA=0;
+                $acumuladoN=0;
+                $noche=0;
+              if($fechaF!=""||$fechaI!=""){
+                $sentencia = "SELECT * FROM empleados where numero = '$id' AND fechaDate BETWEEN '$fechaI' AND '$fechaF' group by fechaDate ";
                 
-              
-                $sentencia = "SELECT * FROM empleados where numero = '$id' AND fechaDate BETWEEN '$fechaI' AND '$fechaF'  order by fechaDate  ";
                 $ejecutar = $conexion->query($sentencia);
                  while($fila = $ejecutar->fetch_assoc()) {                
                     
@@ -64,79 +75,126 @@
                                     
                 }
                 $longitud=count($arrayhoras);
-                echo $longitud;
+               
                 for ($i=0; $i < $longitud; $i++) { 
                     
                           if($arrayhoras[$i][1]=="Entrada"){
-                ?>    
+                            $start=date_create($arrayhoras[$i][0]);
+                            $end=date_create($arrayhoras[($i+1)][0]);
+                           
+                            $unixEntrada=date_format($start, 'U');
+                            $unixSalida=date_format($end, 'U');
+                ?>          
             <tr>    
            <!--  ingresanos fechas de entrada  -->        
-              <td><?php echo fechaLarga($arrayhoras[$i][0]) ?></td>
+              <td><?php echo fechaLarga($arrayhoras[$i][0])." (".date('H:i',$unixEntrada)."-".date("H:i",$unixSalida).")" ?></td>
                 <!--  restamos fecha de entrada con fecha de salida -->
               <td class="text-center"> <?php  
-                          $start=date_create($arrayhoras[$i][0]);
-                          $end=date_create($arrayhoras[($i+1)][0]); 
-                          $interval=date_diff($start,$end);
-                          $intervalH=$interval->format('%h horas ');
-                          $intervalM=$interval->format('%i minutos');                          
-                          $unixEntrada=date_format($start, 'U');
-                          $unixSalida=date_format($end, 'U');
+                                                                   
+                           //unix dia del registro.
                           $unixHorasDia = ($unixSalida-$unixEntrada);
                           $horasDia=($unixHorasDia/3600);
                           $horasDia= floor($horasDia); //horas de trabajo por dia.
                           $min=($unixHorasDia/3600);$min=$min-$horasDia; 
-                          $min=$min*60;                // minutos de trabajo por dia.
-                          $horaEntrada=strtotime($arrayhoras[$i][0]);  //unix dia del registro.                      
-                          $horaEntrada2=date("Y-m-d",$horaEntrada);//dia del registro.                          
-                          $limiteEntrada= strtotime('+6 hour',strtotime($horaEntrada2));//limite 6 am. 
-                          $horasNocturnas=$limiteEntrada-$horaEntrada;//tiempo nocturno unix.
+                          $min=$min*60;             // minutos de trabajo por dia.                           
+                          $diaEntrada=date("Y-m-d",$unixEntrada);//dia del registro.
+                          $diaSalida=date("Y-m-d",$unixSalida);                          
+                          $entrada6am= strtotime('+6 hour',strtotime($diaEntrada));//limite 6 am. 
+                          $entrada10pm= strtotime('+22 hour',strtotime($diaEntrada));//limite 10 pm. 
+                          $salida6am=strtotime('+6 hour',strtotime($diaSalida));          
+                          $horasNocturnas=$entrada6am-$unixEntrada;//tiempo nocturno unix.
+                          //le coloca un cero alos minutos-------------//
                           if($min<9.9){echo $horasDia.":0".$min."'" ;
+                           
                           }else{ echo $horasDia.":".$min."'" ;}
+
+                          $acumuladoUnixD= $acumuladoUnixD+$unixHorasDia;
+                        
+                          
                           
                     ?>              
                </td>
-              <td class="text-center"><?php 
-                            if($limiteEntrada<$horaEntrada){
-                         echo floor(($unixSalida-$unixEntrada)/3600);
-                         }else{
-                              echo floor(($unixSalida-$limiteEntrada)/3600);
-                         }          
-                       
-                         
+              <td class="text-center"> <?php 
+               //echo $horasDia;
+                           if($unixEntrada+3600>$entrada6am && $unixSalida< $entrada10pm){
+
+                                echo $horasDia;
+                           }
+                            if($unixEntrada+1200<$entrada6am && $unixSalida> $entrada6am){
+
+                                echo $horasDia=floor(($unixSalida-$entrada6am)/3600);
+                            }
+                             if($unixEntrada<$entrada10pm  && $unixSalida>$entrada10pm && $unixSalida-1200<$salida6am){
+                                echo $horasDia=floor(($entrada10pm-$unixEntrada+600)/3600);
+                             }                           
+                           if($unixEntrada<$entrada10pm && $unixSalida>$entrada10pm && $unixEntrada<$entrada6am) {  
+                               $horasDia= ($entrada10pm+540-$unixEntrada) /3600;                     
+                                echo $horasDia=floor($horasDia);                      
+                             } 
+                         $horasDA=$horasDA+$horasDia;
+              ?> </td>
+              <td class="text-center">
+              <?php 
+
+               if( $min<51){
+                echo $min."'";
+                $minDA=$minDA+$min;
+            }
+               
               
-              ?></td>
+              ?>
+              </td>
               <td class="text-center">
                 <?php ;                       
-                        if($limiteEntrada>$horaEntrada){                                      
-                            $horasNocturnas=$limiteEntrada-$horaEntrada;                        
+                        if($entrada6am>$unixEntrada){                                      
+                            $horasNocturnas=$entrada6am-$unixEntrada;                        
                             if( $horasNocturnas>3300 && $horasNocturnas<5400){
-                                echo "1";
+                                echo $noche=1;
                             }else{
                                 if(($horasNocturnas-1800)<0){
                                 
                                  }else{
-                                    echo "min".date("i",$horasNocturnas);
+                                    echo  date("i",$horasNocturnas)."'";
                                  }
                             }         
                
-                        } ?></td>
-              <td><?php 
-              
-              
-              ?></td>
-              <td><?php   ?></td>             
+                        } 
+                        if(($unixHorasDia+$unixEntrada)>$entrada10pm && ($unixSalida)>$salida6am){
+                            echo $noche=8;
+                        }
+                        if(($unixHorasDia+$unixEntrada)>$entrada10pm && $unixSalida<$salida6am){
+                            echo $noche= floor(($unixSalida+540-$entrada10pm)/3600);
+                        }
+
+                        $acumuladoN=$acumuladoN+$noche;
+                        
+                        
+                        ?></td>
+              <td></td>
+                       
                 </tr>   
      <?php 
                           }
+                         
                 }
+            }
      ?>
      <thead class=" bgTableHead text-warning text-center">
+                    <td>TOTALES</td>
+                    <td><?php 
+                    $horasDiaA=($acumuladoUnixD/3600);
+                    $horasDiaA= floor($horasDiaA); //horas de trabajo por dia.
+                    $minA=($acumuladoUnixD/3600);$minA=$minA-$horasDiaA; 
+                    $minA= floor($minA*60); 
+                    if($minA<9.9){ echo $horasDiaA.":"."0".$minA;}
+                    else{ echo $horasDiaA.":".$minA;}
+                   
+                 ?> </td>
+                    <td><?php echo floor($horasDA) ?></td>
+                    <td><?php echo $minDA ?></td>
+                    <td><?php echo $acumuladoN ?></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                   
 
                 </thead>
         </table>
@@ -182,6 +240,16 @@ var dateControl = document.querySelector('input[type="date"]#periodoI');
 dateControl.value = "<?php echo $fechaI?>";
 var dateControl = document.querySelector('input[type="date"]#periodoF');
 dateControl.value = "<?php echo $fechaF?>";
+</script>
+<script>
+$(document).ready(function() {
+    $("#periodoF").change(function() {
+ if($('#periodoI').val()>$('#periodoF').val()){
+     alert("fecha final menor")
+ }
+});
+});
+
 </script>
 
 <!-- "idE=" + idE + 

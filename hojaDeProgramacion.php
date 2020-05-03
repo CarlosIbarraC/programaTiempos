@@ -46,6 +46,11 @@ require_once("functions.php");
                     <a href="formularioProgramacion.php" class="text-warning">Formulario de Programacion</a>
                 </button>
             </div>
+            <div class="col">
+                <button class="btn btn-warning my-4 px-3 mx-auto">
+                    <a href="horasDeTrabajoPersonal.php" class="text-dark"><strong>Horas de Trabajo</strong></a>
+                </button>
+            </div>
 
         </div>
     </div>

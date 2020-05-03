@@ -56,6 +56,9 @@ session_start();
                     <a href="hojaDeTrabajo.php" class="text-warning">hoja Tiempos Reloj</a>
                 </button>
             </div>
+            <div class="formDatosE  col-4">
+                    <a href="horasDeTrabajoPersonal.php"><button class="btn btn-warning  my-4 px-3 btn-md">Horas de trabajo </button></a>
+                </div>
 
         </div>
     </div>
