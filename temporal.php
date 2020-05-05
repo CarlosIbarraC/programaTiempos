@@ -1,5 +1,9 @@
-<?php
+<?php 
 session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
+
 require 'functions.php';
 require 'conexion.php';
   
@@ -43,13 +47,7 @@ require 'conexion.php';
                     
                 </tr>
                 <?php
-            /*  SELECT N.area
-             FROM  nombresempleados N,programacion P
-             WHERE N.area <> P.area  group by N.area */ 
-           
-               /* $sentencia = "SELECT N.area
-               FROM  nombresempleados N,programacion P 
-               WHERE N.area != P.area group by N.area " ; */             
+                        
                $sentencia = "SELECT area    
                FROM Programacion WHERE fechaPrograma == '$fechaMax'
                " ;

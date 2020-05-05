@@ -1,5 +1,8 @@
-<?php
- session_start();
+<?php 
+session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
  require 'functions.php';
  require 'conexion.php';
 
@@ -130,7 +133,11 @@
                            if($unixEntrada<$entrada10pm && $unixSalida>$entrada10pm && $unixEntrada<$entrada6am) {  
                                $horasDia= ($entrada10pm+540-$unixEntrada) /3600;                     
                                 echo $horasDia=floor($horasDia);                      
-                             } 
+                             }
+                             if($unixEntrada<$entrada10pm && $unixSalida>$entrada10pm && $unixSalida>$salida6am+3600) {  
+                                $horasDia= ($entrada10pm+540-$unixEntrada) /3600+($unixSalida-$salida6am)/3600;                     
+                                 echo $horasDia=floor($horasDia);                      
+                              } 
                          $horasDA=$horasDA+$horasDia;
               ?> </td>
               <td class="text-center">
@@ -165,6 +172,9 @@
                         if(($unixHorasDia+$unixEntrada)>$entrada10pm && $unixSalida<$salida6am){
                             echo $noche= floor(($unixSalida+540-$entrada10pm)/3600);
                         }
+                        /* if($unixEntrada>$entrada10pm-900 && $unixSalida<$salida6am){
+                            echo $noche=$horasDia;
+                        } */
 
                         $acumuladoN=$acumuladoN+$noche;
                         

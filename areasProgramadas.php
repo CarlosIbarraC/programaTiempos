@@ -1,5 +1,8 @@
 <?php
 session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
 require 'functions.php';
 require 'conexion.php';
 $fechaMax=$_SESSION['fechaSalida'];  

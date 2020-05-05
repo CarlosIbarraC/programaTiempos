@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
+
+?>
 <meta charset="UTF-8">
 <title>manejo de tiempos</title>
 <meta name="viewport" content="width=device-width, user-scalable=no,

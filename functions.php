@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+
  function insertar_datos($ruc,$nombre,$fecha,$saldo,$prueba){
 		 global $conexion;	
 		  

@@ -1,7 +1,11 @@
-<?php
+<?php 
+session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
  require 'functions.php';
  require 'conexion.php';
-  session_start();
+ 
   if(isset($_SESSION['Empleado'])){
     $id=$_SESSION['Empleado'];
   }else{

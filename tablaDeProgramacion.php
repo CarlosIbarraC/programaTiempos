@@ -1,4 +1,10 @@
+<?php 
+session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
 
+?>
 
 <div class="container">
    
@@ -23,7 +29,7 @@
             </thead>
         </tr>
         <?php   
-           session_start();
+           
             require 'functions.php';
             require 'conexion.php';
             /* -----------------fecha en español--------------------- */

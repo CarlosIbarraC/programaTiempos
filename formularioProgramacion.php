@@ -15,13 +15,18 @@
 <script src="js/select2.js"></script>
 </head>
 <?php
+session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
+
 
 /* 
 ------------------------------------inserta datos nuevos-------------------------- */
 
 require_once("conexion.php");
 require_once("functions.php");
-session_start();
+
  if(isset($_SESSION['fechaEntrada'])){
      $fechaProgramacionE=$_SESSION['fechaEntrada'];
 

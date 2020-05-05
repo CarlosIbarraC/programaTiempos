@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +28,7 @@
 <?php
 /* 
 ------------------------------------inserta datos nuevos-------------------------- */
-session_start();
+
 require_once("conexion.php");
 require_once("functions.php");
 

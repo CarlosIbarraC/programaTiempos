@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
 require_once "conexion.php";
 $fecha=$_POST['fechaP'];
 $id=$_POST['idP'];

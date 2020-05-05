@@ -1,5 +1,9 @@
-<?php
+<?php 
 session_start();
+if($_SESSION['usuario']==""){
+    header("location:login.php");
+}
+
 $id = $_POST['id'];
 $periodoI=$_POST['periodoI'];
 $periodoF=$_POST['periodoF'];
