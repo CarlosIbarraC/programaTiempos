@@ -142,4 +142,17 @@ function eliminarDatosTiempos(id){
     }
   });
 }
- 
+function enviarAlerta(){
+      var closable = alertify.alert().setting();
+
+      alertify.alert('tabla')
+        .setting({
+          'label':'Cerrar',
+          'message': 'o' + (closable ? ' ' : ' no es ') + 'validada.' ,
+          'onok': function(){ alertify.success('Verifica');}
+        }).show();
+
+
+}
+
+    

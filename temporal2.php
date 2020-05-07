@@ -25,6 +25,7 @@ if($_SESSION['usuario']==""){
     <script src="funciones.js/funciones.js"></script>
     <link href='css/select2.css' rel='stylesheet' type='text/css'>
     <script src="js/select2.js"></script>
+    
 </head>
 <div class="container ">
 <div class="  pl-3 portada">
@@ -73,73 +74,61 @@ alert('Error al copiar fichero, reintentalo')
     	 
     	 $fp = fopen($archivo_guardado,"r");//abrir un archivo para solo lectura  'r'.
          $rows = 0;
+
+         //------------------ validacion tabla csv --------------------//
          $datos =fgetcsv($fp , 7000 , ",");
-      
+     
          if( count($datos)!= 4){  
-            ?>
-            <script>
-            alert('fallo ingreso tabla no valida')
-            location.href ="login.php";
-            </script>
-            <?php   
+           ?><script> enviarAlerta();  </script>   <?php     
+       
         }
         if(!preg_match("/\Nombre\b/i",$datos[1])){          
-            ?>
-            <script>
-            alert('fallo ingreso tabla no valida')
-            location.href ="login.php";
-            </script>
-            <?php
+            ?><script> enviarAlerta();  </script>   <?php 
         }
         if(!preg_match("/\Tiempo\b/i",$datos[2])){            
-            ?>
-            <script>
-            alert('fallo ingreso tabla no valida')
-            location.href ="login.php";
-            </script>
-            <?php
-           
+            ?><script> enviarAlerta();  </script>   <?php 
         }
         if(!preg_match("/\Estado\b/i",$datos[3])){
-            ?>
-            <script>
-            alert('fallo ingreso tabla no valida')
-            location.href ="login.php";
-            </script>
-            <?php
+            ?><script> enviarAlerta();  </script>   <?php     
         }
-
-         while ($datos = fgetcsv($fp , 3000 , ",")) {
-				 $rows ++;
+     
+        /*  while ($datos = fgetcsv($fp , 7000 , ",")!==FALSE) {
+            
+          
+                 $rows ++;    
 				
          	if ($rows > 1) {				
-				
 				 $resultado = insertar_datos($datos[0],$datos[1],$datos[2],$datos[3],$datos[1].$datos[2]);				   		
 				 if(!$resultado){
 				 $alerta ='false';         	
-         	}
-                 
+         	}                 
     }else{
     	?>
 <script>
 alert('termino de ingresar')
 </script>
 <?php
-    }
+    }	
+}      */
 
-	
-} 
-  
+}else{
+    ?>
+    <script>
+        var closable = alertify.alert().setting();
+
+       alertify.alert('tabla')
+         .setting({
+           'label':'Cerrar',
+           'message': 'o' + (closable ? ' ' : ' no es ') + 'validada.' ,
+           'onok': function(){ alertify.success('Verifica');}
+         }).show();
+        
+        </script>
+    <?php
 }
+?>
 
-
-
-
-	?>
-<script>
-alert('tabla copiada exitosamente')
-</script>
-<?php
+<?php	
 
 }
 /* 
@@ -166,3 +155,4 @@ alert('tabla copiada exitosamente')
     </div>
     
     
+   

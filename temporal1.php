@@ -47,7 +47,7 @@ if($_SESSION['usuario']==""){
             </div>
 
         </div>
-    </div>
+    </div>>
     <div class="container mt-3 ">
         
     </div>
@@ -73,42 +73,6 @@ alert('Error al copiar fichero, reintentalo')
     	 
     	 $fp = fopen($archivo_guardado,"r");//abrir un archivo para solo lectura  'r'.
          $rows = 0;
-         $datos =fgetcsv($fp , 7000 , ",");
-      
-         if( count($datos)!= 4){  
-            ?>
-            <script>
-            alert('fallo ingreso tabla no valida')
-            location.href ="login.php";
-            </script>
-            <?php   
-        }
-        if(!preg_match("/\Nombre\b/i",$datos[1])){          
-            ?>
-            <script>
-            alert('fallo ingreso tabla no valida')
-            location.href ="login.php";
-            </script>
-            <?php
-        }
-        if(!preg_match("/\Tiempo\b/i",$datos[2])){            
-            ?>
-            <script>
-            alert('fallo ingreso tabla no valida')
-            location.href ="login.php";
-            </script>
-            <?php
-           
-        }
-        if(!preg_match("/\Estado\b/i",$datos[3])){
-            ?>
-            <script>
-            alert('fallo ingreso tabla no valida')
-            location.href ="login.php";
-            </script>
-            <?php
-        }
-
          while ($datos = fgetcsv($fp , 3000 , ",")) {
 				 $rows ++;
 				

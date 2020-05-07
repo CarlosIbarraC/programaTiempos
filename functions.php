@@ -1,10 +1,8 @@
-<?php 
-
-
+<?php
  function insertar_datos($ruc,$nombre,$fecha,$saldo,$prueba){
 		 global $conexion;	
-		  
-		
+	
+		 	
  	$sentencia = "INSERT INTO empleados (numero,nombre,fecha,estado,prueba) values ('$ruc','$nombre','$fecha','$saldo','$prueba')";
 	 $ejecutar = mysqli_query($conexion,$sentencia);
 	 seleccionarHora();
