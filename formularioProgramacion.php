@@ -57,6 +57,10 @@ require_once("functions.php");
                         class="text-warning text-left">Listado Empleados</a></button>
             </div>
             <div class="col">
+                <button class="btn btn-primary  my-4 px-3 mx-auto"><a href="login.php"
+                        class="text-warning text-left">SALIR</a></button>
+            </div>
+            <div class="col">
                 <button class="btn btn-primary my-4 px-3 mx-auto">
                     <a href="hojaDeTrabajo.php" class="text-warning">hoja Tiempos Reloj</a>
                 </button>
@@ -164,30 +168,3 @@ $(document).ready(function() {
          });   
 </script>
 
-<!-- <script>
-$(document).ready(function() {
-    $("#btnProgramacion").click(function() {
-      var inputfecha1=$('#Inputfecha1').val();
-      var inputfecha2=$('#Inputfecha2').val();      
-      var SelectArea=$('#SelectArea').val();
-      var diasProgramacion= $('input:radio[name=diasProgramacion]:checked').val();
-      var inputHora1=$('#InputHora1').val();
-      var inputHora2=$('#InputHora2').val();
-      alert("The text has been changed.");
-      var closable=inputfecha2;
-     console.log(inputfecha1,inputfecha2,SelectArea,diasProgramacion,inputHora1,inputHora2);
-      if(inputfecha1>inputfecha2){
-        alertify.alert()
-                .setting({
-                  'label':'ok',
-                  'message': 'This dialog is : ' + (closable ? ' ' : ' not ') + 'closable.' ,
-                  'onok': function(){ alertify.success('Gracias');}
-                }).show();
-      }else{
-        agregarFormulario(inputfecha1,inputfecha2,SelectArea,diasProgramacion,inputHora1,inputHora2);  
-
-       }	 
-         });
-        });
-    
-</script>  -->

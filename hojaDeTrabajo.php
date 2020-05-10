@@ -32,7 +32,11 @@ if($_SESSION['usuario']==""){
 require_once("conexion.php");
 require_once("functions.php");
 
-$id=$_SESSION['Empleado'];
+if(isset($_SESSION['Empleado'])){
+    $id=$_SESSION['Empleado'];
+}else{
+    $id=0;
+}
 ?>
 
 <body>

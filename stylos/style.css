@@ -3,7 +3,7 @@
     margin: 0px;
 }
 body{
-    background: rgb(117, 147, 192);
+    background: rgb(7, 31, 66);
     animation-name: example;
     animation-duration: 3s;
 }
@@ -32,7 +32,7 @@ div.formDatosE{
 }
 @keyframes example {
     from {background-color: rgb(0, 39, 88);}
-    to {background-color:rgb(88, 114, 153);}
+    to {background-color:rgb(11, 34, 68);}
   }
   @keyframes slidein {
     from {

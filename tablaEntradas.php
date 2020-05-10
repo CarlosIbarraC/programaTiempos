@@ -1,8 +1,5 @@
-<?php 
-session_start();
-if($_SESSION['usuario']==""){
-    header("location:login.php");
-}
+<?php
+ session_start();
  require 'functions.php';
  require 'conexion.php';
  
@@ -19,7 +16,7 @@ if($_SESSION['usuario']==""){
 <div class="container">  
 
     <?php
-      fechas() ;
+     // fechas() ;
            
         ?>
 

@@ -5,7 +5,12 @@ if($_SESSION['usuario']==""){
 }
 require 'functions.php';
 require 'conexion.php';
-$fechaMax=$_SESSION['fechaSalida'];  
+if(isset($_SESSION['fechaSalida'])){
+  echo  $fechaMax= $_SESSION['fechaSalida']; 
+}else{
+    $fechaMax="";
+}
+
  ?>
 <div class="container mt-4 border">
     <div class="row">
@@ -49,16 +54,17 @@ $fechaMax=$_SESSION['fechaSalida'];
                FROM programacion where fechaPrograma ='$fechaMax' group by area" ;
 
                $ejecutar = $conexion->query($sentencia);
+               $areasP='';
                 while($fila = $ejecutar->fetch_assoc()) { 
+
+                    $areasP=$fila['area']."-".$areasP;
+                 }
 
                   ?>
                     <tr>
-                    <td class="text-danger text-center px-3 py-2"><?php echo $fila['area']?></td>                   
+                    <td class="text-danger text-center px-3 py-2"><?php echo $areasP?></td>                   
                 </tr>
-                <?php
               
-                }
-            ?>
             </table>
         </div>
     </div>
