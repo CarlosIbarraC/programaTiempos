@@ -7,4 +7,6 @@ if(!$conexion){
 <script> alert ('fallo conexiom') </script> 
 <?php
 }
+
 ?>
+

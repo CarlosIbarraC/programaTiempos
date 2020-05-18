@@ -32,18 +32,21 @@ if($_SESSION['usuario']==""){
         </div>
     </div>
     <div class="container">
-        <div class="d-flex justify-content-left">
-            <div class="col-4">
-                <button class="btn btn-primary  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
+        <div class="row d-flex justify-content-left">
+            <div class="col-6 col-sm-3">
+                <button class="btn btn-success  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
                         class="text-warning text-left">Listado Empleados</a></button>
+            </div>           
+           
+            <div class="col-6 col-sm-3">
+                <button class="btn btn-success my-4 px-3 mx-auto">
+                    <a href="hojaDeTrabajo.php" class="text-warning">Verificacion</a>
+                </button>
             </div>
-            <div class="col-4">
+            <div class="col-6 col-sm-3">
                 <button class="btn btn-primary my-4 px-3 mx-auto">
                     <a href="hojaDeProgramacion.php" class="text-warning">Programacion</a>
                 </button>
-            </div>
-            <div class="col-4">
-        <button class="btn btn-primary my-4 px-3 mx-auto"><a href="hojaDeTrabajo.php " class="text-warning">Empleados</a></button>
             </div>
 
         </div>
@@ -156,8 +159,10 @@ alert('tabla copiada exitosamente')
             <div class="row mx-0">
                 <div class="col-10 col-sm-6">
                 	<input type="file" name="archivo" class="form-control btn-warning" />
+                    <label for="" class="text-warning">⚠ Si desea subir de un archivo CSV separado por comas, por favor
+                        siga el orden de la tabla (id-empleado, nombre, fecha, estado)</label>
                 </div>
-                <div class="col-10 col-sm-6">
+                <div class="col-10 col-sm-6 mt-sm-0 mt-3">
                     <button><input type="submit" value="SUBIR ARCHIVO" class="form-control btn-warning" name="enviar"></button>
                 </div>
                 </div>

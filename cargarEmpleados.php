@@ -91,6 +91,8 @@ insertar_nombres($idEmpleado,$nombreE,$areaE,$observacionesE);
 <!-- ------------------------------------inserta datos nuevos--------------------------  -->
 
 <body>
+
+
     <div class="container ">
     <div class="  pl-3 portada">
             <img src="img/caratula-2.png" alt="" class="img-fluid">

@@ -74,9 +74,11 @@ if($_SESSION['usuario']==""){
                 $ejecutar = $conexion->query($sentencia);
                  while($fila = $ejecutar->fetch_assoc()) {                
                     
-                    $arrayhoras[]=[$fila['fechaDate'],$fila['estado']];              
+                    $arrayhoras[]=[$fila['fechaDate'],$fila['estado']];  
+                             
                                     
                 }
+                
                 $longitud=count($arrayhoras);
                
                 for ($i=0; $i < $longitud; $i++) { 
@@ -123,10 +125,10 @@ if($_SESSION['usuario']==""){
 
                                 echo $horasDia;
                            }
-                            if($unixEntrada+1200<$entrada6am && $unixSalida> $entrada6am){
+                            /* if($unixEntrada+1200<$entrada6am && $unixSalida> $entrada6am){
 
                                 echo $horasDia=floor(($unixSalida-$entrada6am)/3600);
-                            }
+                            } */
                              if($unixEntrada<$entrada10pm  && $unixSalida>$entrada10pm && $unixSalida-1200<$salida6am){
                                 echo $horasDia=floor(($entrada10pm-$unixEntrada+600)/3600);
                              }                           

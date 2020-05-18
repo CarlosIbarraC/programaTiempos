@@ -16,8 +16,7 @@ if($_SESSION['usuario']==""){
         <div class="container">
             <div class="row mx-0 flex-row ">
                 <div class="formDatosE  col-4">
-                    <a href="hojaDeTrabajo.php"><button class="btn btn-warning  my-4 px-3 btn-md">volver
-                            administracion</button></a>
+                    <a href="hojaDeTrabajo.php"><button class="btn btn-success  my-4 px-3 btn-md">Verificacion</button></a>
                 </div>
                 <div class="col-4">
                     <button type="button" class="btn btn-primary my-4 px-3 btn-md" data-toggle="modal" data-target="#IngresoNuevoE">
@@ -25,7 +24,7 @@ if($_SESSION['usuario']==""){
                     </button>
                 </div>
                 <div class="formDatosE  col-4">
-                    <a href="horasDeTrabajoPersonal.php"><button class="btn btn-warning  my-4 px-3 btn-md"><strong>Horas de Trabajo</strong></button></a>
+                    <a href="horasDeTrabajoPersonal.php"><button class="btn btn-success  my-4 px-3 btn-md"><strong>Horas de Trabajo</strong></button></a>
                 </div>
             </div>
         </div>

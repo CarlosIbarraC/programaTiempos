@@ -35,8 +35,12 @@ if($_SESSION['usuario']==""){
     <div class="container">
         <div class="d-flex justify-content-left">
             <div class="col">
-                <button class="btn btn-primary  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
+                <button class="btn btn-success  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
                         class="text-warning text-left">Listado Empleados</a></button>
+            </div>
+            <div class="col">
+                <button class="btn btn-success  my-4 px-3 mx-auto"><a href="hojaDeTrabajo.php"
+                        class="text-warning text-left">Verificacion</a></button>
             </div>
             <div class="col">
                 <button class="btn btn-primary my-4 px-3 mx-auto">

@@ -47,18 +47,22 @@ if(isset($_SESSION['Empleado'])){
     </div>
     </div>
     <div class="container">
-        <div class="d-flex justify-content-left">
-            <div class="col">
-                <button class="btn btn-primary  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
+        <div class="row d-flex justify-content-left">
+            <div class="col-6 col-sm-3">
+                <button class="btn btn-success  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
                         class="text-warning text-left">Listado Empleados</a></button>
             </div>
-            <div class="col">
+            <div class="col-6 col-sm-3">
+                <button class="btn btn-success  my-4 px-3 mx-auto"><a href="index.php"
+                        class="text-warning text-left">Inicio</a></button>
+            </div>
+            <div class="col-6 col-sm-3">
                 <button class="btn btn-primary my-4 px-3 mx-auto">
                     <a href="hojaDeProgramacion.php" class="text-warning">Tabla de Programacion</a>
                 </button>
             </div>
-            <div class="col">
-                <button class="btn btn-primary my-4 px-3 mx-auto">
+            <div class="col-6 col-sm-3">
+                <button class="btn btn-primary my-4 px-1 mx-auto">
                     <a href="formularioProgramacion.php" class="text-warning">formulario de Programacion</a>
                 </button>
             </div>
