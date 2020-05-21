@@ -66,6 +66,11 @@ if(isset($_SESSION['Empleado'])){
                     <a href="formularioProgramacion.php" class="text-warning">formulario de Programacion</a>
                 </button>
             </div>
+            <div class="col-6 col-sm-3">
+                <button class="btn btn-success my-4 px-1 mx-auto">
+                    <a href="horasDeTrabajoPersonal.php" class="text-warning">Horas trabajo</a>
+                </button>
+            </div>
 
         </div>
     </div>

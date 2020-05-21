@@ -23,7 +23,7 @@ if($_SESSION['usuario']==""){
   
  ?>
  <div class="container my-4 ">
-        <div class="col-12 ">
+        <div class="col-12 mx-0 col-sm-mx-auto">
         <h3 class= "text-center text-warning py-4">PERIODO DE VISUALIZACION</h3>
             <div class="d-flex justify-content-center">
                 <form action="tablaHorasPersonal.php" method="POST" class="text-center form-control col-4 bg-warning">
@@ -104,13 +104,13 @@ if($_SESSION['usuario']==""){
                           $unixHorasDia = ($unixSalida-$unixEntrada);
                           $horasDia=($unixHorasDia/3600);
                           $horasDia= floor($horasDia); //horas de trabajo por dia.
-                          $min=($unixHorasDia/3600);$min=$min-$horasDia; 
+                          $min=$unixHorasDia/3600-$horasDia; 
                           $min=$min*60;             // minutos de trabajo por dia.                           
                           $diaEntrada=date("Y-m-d",$unixEntrada);//dia del registro.
                           $diaSalida=date("Y-m-d",$unixSalida);                          
                           $entrada6am= strtotime('+6 hour',strtotime($diaEntrada));//limite 6 am. 
                           $entrada10pm= strtotime('+22 hour',strtotime($diaEntrada));//limite 10 pm. 
-                          $salida6am=strtotime('+6 hour',strtotime($diaSalida));          
+                          $salida6am=strtotime('+30 hour',strtotime($diaEntrada));          
                           $horasNocturnas=$entrada6am-$unixEntrada;//tiempo nocturno unix.
                           //le coloca un cero alos minutos-------------//
                           if($min<9.9){echo $horasDia.":0".$min."'" ;
@@ -125,31 +125,40 @@ if($_SESSION['usuario']==""){
                </td>
               <td class="text-center"> <?php 
                //echo $horasDia;
-                           if($unixEntrada+3600>$entrada6am && $unixSalida< $entrada10pm){
+              
+                           if($unixEntrada+1200>$entrada6am && $unixSalida< $entrada10pm){
+                                $horasDia=floor(($unixSalida-$unixEntrada)/3600);
+                           }//caso3 con timbrada 20 MIN antes y despues de 6am
+                           if($unixEntrada+300<$entrada6am && $unixSalida<$entrada10pm){
+                              $horasDia=floor(($unixSalida+300-$entrada6am)/3600);
+                           }//caso 2 entra antes de las 5:05 de la mañana y sale antes de las 10 de la noche
+                           if ($unixEntrada>$entrada6am && $unixSalida>$entrada10pm && $unixSalida<$salida6am){
+                              $horasDia=floor(($entrada10pm-$unixEntrada)/3600);
+                            
+                           }//caso 4 entra despues de las 6am y sale despues de las 11pm
 
-                                echo $horasDia;
+                       if($unixEntrada-1200<$entrada10pm && $unixSalida>$salida6am ){
+                                            
+                                 $yy=floor(($entrada10pm-$unixEntrada)/3600);
+                                 $xx=floor(($unixSalida-$salida6am)/3600);
+                                
+                                  $horasDia=($xx+$yy);                                 
+                            }  //caso 5 entra una hora antes de las 10 pm y salida una hora despues de las 6 am
+                           if($unixEntrada>$entrada10pm && $unixSalida>$salida6am+3600){
+                               $horasDia=floor(($salida6am-$unixSalida)/3600)+$horasDia;
+
                            }
-                            /* if($unixEntrada+1200<$entrada6am && $unixSalida> $entrada6am){
-
-                                echo $horasDia=floor(($unixSalida-$entrada6am)/3600);
-                            } */
-                             if($unixEntrada<$entrada10pm  && $unixSalida>$entrada10pm && $unixSalida-1200<$salida6am){
-                                echo $horasDia=floor(($entrada10pm-$unixEntrada+600)/3600);
-                             }                           
-                           if($unixEntrada<$entrada10pm && $unixSalida>$entrada10pm && $unixEntrada<$entrada6am) {  
-                               $horasDia= ($entrada10pm+540-$unixEntrada) /3600;                     
-                                echo $horasDia=floor($horasDia);                      
-                             }
-                             if($unixEntrada<$entrada10pm && $unixSalida>$entrada10pm && $unixSalida>$salida6am+3600) {  
-                                $horasDia= ($entrada10pm+540-$unixEntrada) /3600+($unixSalida-$salida6am)/3600;                     
-                                 echo $horasDia=floor($horasDia);                      
-                              } 
+                           if($unixEntrada>$entrada10pm && $unixSalida<$salida6am){
+                               $horasDia=0;
+                           }
+                           echo $horasDia; 
+                                               
                          $horasDA=$horasDA+$horasDia;
               ?> </td>
               <td class="text-center">
               <?php 
 
-               if( $min<51){
+               if( $min<59){
                 echo $min."'";
                 $minDA=$minDA+$min;
             }

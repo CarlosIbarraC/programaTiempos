@@ -33,25 +33,31 @@ if($_SESSION['usuario']==""){
     </div>
     </div>
     <div class="container">
-        <div class="d-flex justify-content-left">
-            <div class="col">
+        <div class="row d-flex justify-content-left">
+            <div class="col-10 col-sm-3">
+                <button class="btn btn-success my-4 px-3 mx-auto">
+                    <a href="index.php" class="text-warning">INICIO</a>
+                </button>
+            </div>
+            <div class="col-6 col-sm-3">
                 <button class="btn btn-success  my-4 px-3 mx-auto"><a href="cargarEmpleados.php"
                         class="text-warning text-left">Listado Empleados</a></button>
             </div>
-            <div class="col">
+            <div class="col-4 col-sm-3">
                 <button class="btn btn-success  my-4 px-3 mx-auto"><a href="hojaDeTrabajo.php"
                         class="text-warning text-left">Verificacion</a></button>
             </div>
-            <div class="col">
+            <div class="col-6 col-sm-3">
                 <button class="btn btn-primary my-4 px-3 mx-auto">
                     <a href="hojaDeProgramacion.php" class="text-warning">Tabla de Programacion</a>
                 </button>
             </div>
-            <div class="col">
+            <div class="col-4 col-sm-3">
                 <button class="btn btn-primary my-4 px-3 mx-auto">
                     <a href="formularioProgramacion.php" class="text-warning">formulario de Programacion</a>
                 </button>
             </div>
+           
 
         </div>
     </div>
@@ -60,7 +66,7 @@ if($_SESSION['usuario']==""){
     </div>
     <script type="text/javascript">
     $(document).ready(function () {
-        $('#tablaHorasPersonal').load('tablaHorasPersonal.php');
+        $('#tablaHorasPersonal').load('tablaHorasPersonal2.php');
        
     });
 </script>
