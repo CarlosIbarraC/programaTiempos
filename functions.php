@@ -362,4 +362,14 @@ function fechaLarga($cadena){
 	$diasx= $diassemana[date('w',strtotime($cadena))]." ".date('d',strtotime($cadena))." de ".$meses[date('n',strtotime($cadena))-1]. " del ".date('Y',strtotime($cadena)) ;
 	echo $diasx;
 }
+
+function Existe($argumento){
+	if($argumento!=0){
+		$respuestaHora= getdate(strtotime($argumento));
+		$respuestaHora=$respuestaHora{'hours'}*3600+$respuestaHora{'minutes'}*60;
+        return $respuestaHora;
+	}else{
+		return 0;
+	}
+}
 ?>

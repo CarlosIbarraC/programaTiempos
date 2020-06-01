@@ -1,8 +1,7 @@
-
 <?php
 session_start();
 require_once "conexion.php";
-//require_once "functions.php"; 
+require_once "functions.php"; 
 $fechaEntrada=$_POST["Inputfecha1"];
 $fechaSalida=$_POST["Inputfecha2"];
 $area=$_POST["SelectArea"];
@@ -13,23 +12,18 @@ $horaEntradaS=$_POST['inputHoraES'];
 $horaSalidaS=$_POST['inputHoraSS'];
 $horaEntradaD=$_POST['inputHoraED'];
 $horaSalidaD=$_POST['inputHoraSD'];
-$horaEntrada = strtotime($horaEntrada);
-$horaEntrada = date("H:i", $horaEntrada);
-$horaSalida = strtotime($horaSalida);
-$horaSalida = date("H:i", $horaSalida);
-$horaEntradaS = strtotime($horaEntradaS);
-$horaEntradaS = date("H:i", $horaEntradaS);
-$horaSalidaS = strtotime($horaSalidaS);
-$horaSalidaS = date("H:i", $horaSalidaS);
-$horaEntradaD = strtotime($horaEntradaD);
-$horaEntradaD = date("H:i", $horaEntradaD);
-$horaSalidaD = strtotime($horaSalidaD);
-$horaSalidaD = date("H:i", $horaSalidaD);
-$fechaSalida= strtotime($fechaSalida);
-$fechaSalida= date("Y-m-d",$fechaSalida);
-$fechaEntradaP=strtotime($fechaEntrada);
-$fechaEntradaP= date("Y-m-d",$fechaEntradaP);
-$_SESSION['fechaEntrada']=$fechaEntradaP;
+
+
+//------------------------------conversion a unix----------------------------------//
+
+$horaEntradaUnix=Existe($horaEntrada);
+$horaSalidaUnix= Existe($horaSalida);
+$horaEntradaSUnix=Existe($horaEntradaS);
+$horaSalidaSUnix= Existe($horaSalidaS);
+$horaEntradaDUnix= Existe($horaEntradaD);
+$horaSalidaDUnix= Existe($horaSalidaD);
+//echo $horaSalidaDUnix."<br>";
+$_SESSION['fechaEntrada']=$fechaEntrada;
 $_SESSION['fechaSalida']=$fechaSalida;
  
  global $conexion;	
@@ -38,17 +32,12 @@ $_SESSION['fechaSalida']=$fechaSalida;
 	while($fila = $ejecutar->fetch_array()) {
 		$idEmpleado=$fila['id_empleado'];
 		$areaP=$fila['area'];
-		$fechaI=$fechaEntrada;
-		$fechaI=strtotime('-1 day',strtotime($fechaI));;
-	    $fechaI=date("Y-m-d", $fechaI); 
-		$fechaS=$fechaSalida;	
-
-	    while ( $fechaI < $fechaS) {
-		
-			 $fechaI=strtotime('+1 day',strtotime($fechaI));
-			 $fechaLV=$fechaI;
-		     $fechaI=date("Y-m-d", $fechaI); 
-			 $fechaT=$fechaI;
+		$fechaI=$fechaEntrada;				
+		$fechaS=$fechaSalida;	      
+	    while ( $fechaI <=$fechaS) {
+					 
+			 $fechaLV=strtotime($fechaI);		    
+			 			
 			 $fechaLV=date("w",$fechaLV);
 			 $n=0; $y=1;
             switch ($diasProgramacion) {
@@ -59,14 +48,14 @@ $_SESSION['fechaSalida']=$fechaSalida;
 						if($n==0){
 							 $entrada= "Entrada";
 							 $cadena = $horaEntrada;                  
-							 $seguro=$idEmpleado.$fechaT.$entrada.$areaP;
+							 $seguro=$idEmpleado.$fechaI.$entrada.$areaP;
 						}else if($n==1){
 							$entrada="Salida";
 							$cadena = $horaSalida;                
-							$seguro=$idEmpleado.$fechaT.$entrada.$areaP;
+							$seguro=$idEmpleado.$fechaI.$entrada.$areaP;
 									   }
 								  $n=$n+1;
-								  $sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,   area) values                ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro',   '$areaP')  ";
+								  $sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,   area) values                ('$idEmpleado','$fechaI','$entrada','$cadena','$seguro',   '$areaP')  ";
 								  $ejecutar2 = mysqli_query($conexion,$sentencia2);
 				   
 						}
@@ -87,14 +76,14 @@ $_SESSION['fechaSalida']=$fechaSalida;
 						if($n==0){
 							 $entrada= "Entrada";
 							 $cadena = $horaE;                  
-							 $seguro=$idEmpleado.$fechaT.$entrada.$areaP;
+							 $seguro=$idEmpleado.$fechaI.$entrada.$areaP;
 						}else if($n==1){
 							$entrada="Salida";
 							$cadena = $horaS;                
-							$seguro=$idEmpleado.$fechaT.$entrada.$areaP;
+							$seguro=$idEmpleado.$fechaI.$entrada.$areaP;
 									   }
 								  $n=$n+1;
-								  $sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,   area) values                ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro',   '$areaP')  ";
+								  $sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,   area) values                ('$idEmpleado','$fechaI','$entrada','$cadena','$seguro',   '$areaP')  ";
 								  $ejecutar2 = mysqli_query($conexion,$sentencia2);
 				   
 						}
@@ -117,27 +106,28 @@ $_SESSION['fechaSalida']=$fechaSalida;
 					if($n==0){
 						 $entrada= "Entrada";
 						 $cadena = $horaE;                  
-						 $seguro=$idEmpleado.$fechaT.$entrada.$areaP;
+						 $seguro=$idEmpleado.$fechaI.$entrada.$areaP;
 					}else if($n==1){
 						$entrada="Salida";
 						$cadena = $horaS;                
-						$seguro=$idEmpleado.$fechaT.$entrada.$areaP;
+						$seguro=$idEmpleado.$fechaI.$entrada.$areaP;
 								   }
 							  $n=$n+1;
-							  $sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,   area) values                ('$idEmpleado','$fechaT','$entrada','$cadena','$seguro',   '$areaP')  ";
+							  $sentencia2 = "INSERT INTO programacion (idEmpleado,fechaPrograma,estado,hora,seguro,   area) values                ('$idEmpleado','$fechaI','$entrada','$cadena','$seguro',   '$areaP')  ";
 							  $ejecutar2 = mysqli_query($conexion,$sentencia2);
 							 
 					}	
 					break;
 			}
 						
-		      
-            
+			$fechaI=strtotime('+1 day',strtotime($fechaI));      
+			$fechaI=date("Y-m-d", $fechaI); 
+			//echo "*".$fechaI;
 		}
 		
 	}
 	
 	
  
-	header('Location: formularioProgramacion.php');
+	//header('Location: formularioProgramacion.php');
 ?>

@@ -110,7 +110,7 @@ require_once("functions.php");
                     <label for='InputhoraES' class='text-warning'>Hora de Entrada sabado</label>
         		<input type='time' class='form-control 'id='InputHoraES' name='inputHoraES'  >
         	        <label for='InputhoraSS' class='text-warning'>Hora de Salida Sabado</label>
-                <input type='time' class='form-control ' id='InputHoraSS' name='inputHoraSS'  >
+                <input type='time' class='form-control ' onchange="validar" id='InputHoraSS' name='inputHoraSS'  >
                     </div>
                     <div id="horasDomingo" class="col-10 col-sm-3 mt-3 aparecer">
                     <label for='InputhoraES' class='text-warning'>Hora de Entrada domingo</label>
@@ -121,11 +121,11 @@ require_once("functions.php");
 
                 </div>
                 <div class="col-12">
-                    <input type="submit" value="ingresar" id="btnProgramacion" class="btn btn-success btn-lg mt-xs-3">
+                    <input type="submit" value="ingresar"  id="btnProgramacion" class="btn btn-success btn-lg mt-xs-3">
                 </div>
             </div>
     		</form>
-    	
+           <!--  onclick="validar()" -->
     </div>
     <div id="areasProgramadas">
     </div>
@@ -168,3 +168,15 @@ $(document).ready(function() {
          });   
 </script>
 
+ <script>
+ $(document).ready(function(){
+  $("#InputHora2").focusin(function(){
+   
+  });
+  $("#InputHora2").focusout(function(){
+    if($('#InputHora1').val()>$('#InputHora2').val()){
+
+    alertify.confirm('Es un tuno nocturno Nocturno?').set('basic', true); }
+  });
+});
+ </script>
